@@ -1,0 +1,17 @@
+<header class="site-header">
+  <div class="header-container">
+    <a href="{{ '/' | relative_url }}" class="brand-logo">
+      <span class="badge-dot"></span>
+      <span>caap1234<span class="logo-accent">.sec</span></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Inicio</a></li>
+        <li><a href="{{ '/about/' | relative_url }}" class="nav-link {% if page.url contains '/about/' %}active{% endif %}">Sobre Mí / CV</a></li>
+        <li><a href="{{ '/tools/' | relative_url }}" class="nav-link {% if page.url contains '/tools/' %}active{% endif %}">Herramientas</a></li>
+        <li><a href="{{ '/writeups/' | relative_url }}" class="nav-link {% if page.url contains '/writeups/' %}active{% endif %}">Writeups HTB</a></li>
+        <li><a href="{{ '/blog/' | relative_url }}" class="nav-link {% if page.url contains '/blog/' %}active{% endif %}">Blog & SecOps</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+<div class="page-container">
+  <article class="article-header">
+    <div style="margin-bottom: 0.75rem;">
+      <a href="{{ '/tools/' | relative_url }}" style="font-size: 0.9rem; color: var(--text-dim);">&larr; Volver a Herramientas</a>
+    </div>
+    <div class="card-tag-row">
+      <span class="badge badge-secops">{{ page.category }}</span>
+      <span class="badge badge-tech">{{ page.language }}</span>
+    </div>
+    <h1 class="article-title">{{ page.title }}</h1>
+    <p class="hero-description" style="margin-bottom: 1.5rem;">{{ page.description }}</p>
+    
+    <!-- Large One-Liner Box -->
+    <div style="margin-top: 1.5rem;">
+      <label style="display:block; font-family: var(--font-mono); font-size: 0.85rem; color: var(--autumn-orange); margin-bottom: 0.5rem; font-weight:600;">
+        <i class="fas fa-bolt"></i> Ejecución directa en terminal:
+      </label>
+      <div class="cmd-box" style="padding: 1rem; font-size: 0.95rem;">
+        <span class="cmd-text" id="tool-cmd">{{ page.one_liner }}</span>
+        <button class="copy-btn" data-target="tool-cmd"><i class="far fa-copy"></i> Copiar Comando</button>
+      </div>
+    </div>
+  </article>
+
+  <div class="content-body">
+    {{ content }}
+  </div>
+</div>

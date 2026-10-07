@@ -1,0 +1,38 @@
+title: "Carlos A. | Cybersecurity & SecOps Engineer"
+email: "caap1234@github.io"
+description: "Portafolio profesional de Ciberseguridad, SecOps, Writeups de HTB y Herramientas de Automatización."
+baseurl: ""
+url: "https://caap1234.github.io"
+author: "caap1234"
+github_username: "caap1234"
+linkedin_username: "carlos-alvarez"
+
+collections:
+  writeups:
+    output: true
+    permalink: /writeups/:name/
+  tools:
+    output: true
+    permalink: /tools/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "writeups"
+    values:
+      layout: "writeup"
+  - scope:
+      path: ""
+      type: "tools"
+    values:
+      layout: "tool"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge

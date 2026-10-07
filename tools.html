@@ -1,0 +1,36 @@
+---
+layout: default
+title: "Herramientas"
+permalink: /tools/
+---
+
+<div class="main-content">
+  <div class="article-header">
+    <h1 class="article-title"><i class="fas fa-terminal"></i> Mis Herramientas & Scripts Open Source</h1>
+    <p class="hero-description">
+      Herramientas desarrolladas para SecOps, auditorías de seguridad y administración de servidores. Cada herramienta cuenta con su comando de ejecución directa vía terminal.
+    </p>
+  </div>
+
+  <div class="grid-2">
+    {% for tool in site.tools %}
+    <div class="card">
+      <div class="card-tag-row">
+        <span class="badge badge-secops">{{ tool.category }}</span>
+        <span class="badge badge-tech">{{ tool.language }}</span>
+      </div>
+      <h2 class="card-title"><a href="{{ tool.url | relative_url }}">{{ tool.title }}</a></h2>
+      <p class="card-desc">{{ tool.description }}</p>
+      
+      <div style="margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-dim);">
+        <strong><i class="fas fa-gear"></i> Uso:</strong> {{ tool.usage_summary }}
+      </div>
+
+      <div class="cmd-box">
+        <span class="cmd-text">{{ tool.one_liner }}</span>
+        <button class="copy-btn"><i class="far fa-copy"></i> Copiar</button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

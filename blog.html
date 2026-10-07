@@ -1,0 +1,28 @@
+---
+layout: default
+title: "Blog & SecOps"
+permalink: /blog/
+---
+
+<div class="main-content">
+  <div class="article-header">
+    <h1 class="article-title"><i class="fas fa-newspaper"></i> Blog & Soluciones en Servidores</h1>
+    <p class="hero-description">
+      Artículos técnicos sobre resolución de problemas reales en servidores Linux, análisis de seguridad, ModSecurity, reglas de firewall y actualizaciones de proyectos.
+    </p>
+  </div>
+
+  <div class="grid-2">
+    {% for post in site.posts %}
+    <div class="card">
+      <div class="card-tag-row">
+        <span class="badge badge-secops">Servidores</span>
+        <span style="font-size: 0.8rem; color: var(--text-subtle);">{{ post.date | date: "%d/%m/%Y" }}</span>
+      </div>
+      <h2 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+      <p class="card-desc">{{ post.excerpt | strip_html | truncate: 140 }}</p>
+      <a href="{{ post.url | relative_url }}" style="font-size: 0.88rem; font-weight: 600;">Leer artículo &rarr;</a>
+    </div>
+    {% endfor %}
+  </div>
+</div>

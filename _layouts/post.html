@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<div class="page-container">
+  <article class="article-header">
+    <div style="margin-bottom: 0.75rem;">
+      <a href="{{ '/blog/' | relative_url }}" style="font-size: 0.9rem; color: var(--text-dim);">&larr; Volver al Blog</a>
+    </div>
+    <h1 class="article-title">{{ page.title }}</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> {{ page.date | date: "%d de %B, %Y" }}</span>
+      <span><i class="far fa-user"></i> {{ page.author | default: site.author }}</span>
+      {% if page.tags %}
+      <span><i class="fas fa-tags"></i> {{ page.tags | join: ", " }}</span>
+      {% endif %}
+    </div>
+  </article>
+
+  <div class="content-body">
+    {{ content }}
+  </div>
+</div>

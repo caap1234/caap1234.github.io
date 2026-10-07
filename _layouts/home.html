@@ -1,0 +1,135 @@
+---
+layout: default
+---
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag">
+        <i class="fas fa-shield-halved"></i> SecOps & Pentesting Portfolio
+      </div>
+      <h1 class="hero-title">
+        Ingeniería en <span class="gradient-text">Ciberseguridad</span>, Servidores y Herramientas.
+      </h1>
+      <p class="hero-description">
+        Especialista en SysAdmin, Hardening de Servidores, Análisis de Incidentes (SecOps) y desarrollo de herramientas de automatización y Pentesting.
+      </p>
+      <div class="hero-actions">
+        <a href="{{ '/tools/' | relative_url }}" class="btn-primary">
+          <i class="fas fa-terminal"></i> Ver Herramientas
+        </a>
+        <a href="{{ '/about/' | relative_url }}" class="btn-secondary">
+          <i class="fas fa-user-shield"></i> Sobre Mí / CV
+        </a>
+      </div>
+    </div>
+
+    <!-- Terminal Visual Widget -->
+    <div class="terminal-card">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span class="terminal-dot dot-red"></span>
+          <span class="terminal-dot dot-yellow"></span>
+          <span class="terminal-dot dot-green"></span>
+        </div>
+        <span class="terminal-title">bash - caap1234@secops-box:~</span>
+      </div>
+      <div class="terminal-body">
+        <p><span class="t-prompt">caap1234@secops-box:~$</span> <span class="t-cmd">whoami</span></p>
+        <p class="t-output">Carlos A. | Cybersecurity & Infrastructure Specialist</p>
+        <br>
+        <p><span class="t-prompt">caap1234@secops-box:~$</span> <span class="t-cmd">cat skills.json</span></p>
+        <p class="t-output">{</p>
+        <p class="t-output">&nbsp;&nbsp;<span class="t-highlight">"Focus"</span>: ["SecOps", "Pentesting", "SysAdmin Hardening"],</p>
+        <p class="t-output">&nbsp;&nbsp;<span class="t-highlight">"Stack"</span>: ["Python", "Bash", "ModSecurity", "Exim", "cPanel"],</p>
+        <p class="t-output">&nbsp;&nbsp;<span class="t-highlight">"Status"</span>: <span class="t-success">"Ready for new challenges"</span></p>
+        <p class="t-output">}</p>
+        <br>
+        <p><span class="t-prompt">caap1234@secops-box:~$</span> <span class="t-cmd">wget -qO- caap1234.sec/run.sh | bash</span> <span class="t-success"># Executing...</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Page Sections -->
+<div class="main-content">
+  
+  <!-- Herramientas Destacadas -->
+  <section style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Herramientas & Scripts Propios</h2>
+      </div>
+      <a href="{{ '/tools/' | relative_url }}" class="btn-secondary" style="padding: 0.4rem 0.9rem; font-size: 0.88rem;">Ver todas &rarr;</a>
+    </div>
+
+    <div class="grid-2">
+      {% for tool in site.tools limit:2 %}
+      <div class="card">
+        <div class="card-tag-row">
+          <span class="badge badge-secops">{{ tool.category }}</span>
+          <span class="badge badge-tech">{{ tool.language }}</span>
+        </div>
+        <h3 class="card-title"><a href="{{ tool.url | relative_url }}">{{ tool.title }}</a></h3>
+        <p class="card-desc">{{ tool.description }}</p>
+        
+        <div class="cmd-box">
+          <span class="cmd-text">{{ tool.one_liner }}</span>
+          <button class="copy-btn"><i class="far fa-copy"></i> Copiar</button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Writeups Recientes -->
+  <section style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Writeups de Hack The Box</h2>
+      </div>
+      <a href="{{ '/writeups/' | relative_url }}" class="btn-secondary" style="padding: 0.4rem 0.9rem; font-size: 0.88rem;">Ver todos &rarr;</a>
+    </div>
+
+    <div class="grid-3">
+      {% for writeup in site.writeups limit:3 %}
+      <div class="card">
+        <div class="card-tag-row">
+          <span class="badge badge-{{ writeup.difficulty | downcase }}">{{ writeup.difficulty }}</span>
+          <span class="badge badge-tech">{{ writeup.os }}</span>
+        </div>
+        <h3 class="card-title"><a href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a></h3>
+        <p class="card-desc">{{ writeup.summary }}</p>
+        <div style="font-size: 0.82rem; color: var(--text-subtle); font-family: var(--font-mono);">
+          <i class="fas fa-bullseye"></i> Vectores: {{ writeup.vectors }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Artículos y Blog Técnico -->
+  <section>
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Blog Técnico & Soluciones en Servidores</h2>
+      </div>
+      <a href="{{ '/blog/' | relative_url }}" class="btn-secondary" style="padding: 0.4rem 0.9rem; font-size: 0.88rem;">Ir al Blog &rarr;</a>
+    </div>
+
+    <div class="grid-2">
+      {% for post in site.posts limit:2 %}
+      <div class="card">
+        <div class="card-tag-row">
+          <span class="badge badge-secops">Servidores</span>
+          <span style="font-size: 0.8rem; color: var(--text-subtle);">{{ post.date | date: "%d/%m/%Y" }}</span>
+        </div>
+        <h3 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p class="card-desc">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+</div>

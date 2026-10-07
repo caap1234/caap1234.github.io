@@ -1,0 +1,39 @@
+---
+layout: default
+title: "Writeups Hack The Box"
+permalink: /writeups/
+---
+
+<div class="main-content">
+  <div class="article-header">
+    <h1 class="article-title"><i class="fas fa-cube"></i> Writeups de Hack The Box</h1>
+    <p class="hero-description">
+      Resolución detallada de máquinas retiradas (Retired) de Hack The Box, enfocándome en la metodología de reconocimiento, explotación y escalación de privilegios.
+    </p>
+
+    <!-- Filter Buttons -->
+    <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap;">
+      <button class="btn-secondary filter-btn active" data-filter="all" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Todos</button>
+      <button class="btn-secondary filter-btn" data-filter="Easy" style="padding: 0.4rem 0.9rem; font-size: 0.85rem; border-color: rgba(16, 185, 129, 0.3);">Easy</button>
+      <button class="btn-secondary filter-btn" data-filter="Medium" style="padding: 0.4rem 0.9rem; font-size: 0.85rem; border-color: rgba(245, 158, 11, 0.3);">Medium</button>
+      <button class="btn-secondary filter-btn" data-filter="Hard" style="padding: 0.4rem 0.9rem; font-size: 0.85rem; border-color: rgba(239, 68, 68, 0.3);">Hard</button>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    {% for writeup in site.writeups %}
+    <div class="card writeup-card" data-difficulty="{{ writeup.difficulty }}">
+      <div class="card-tag-row">
+        <span class="badge badge-{{ writeup.difficulty | downcase }}">HTB {{ writeup.difficulty }}</span>
+        <span class="badge badge-tech">{{ writeup.os }}</span>
+      </div>
+      <h2 class="card-title"><a href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a></h2>
+      <p class="card-desc">{{ writeup.summary }}</p>
+      
+      <div style="font-size: 0.82rem; color: var(--text-subtle); font-family: var(--font-mono); margin-top: auto;">
+        <i class="fas fa-bullseye"></i> {{ writeup.vectors }}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
