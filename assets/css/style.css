@@ -1,16 +1,18 @@
 /* ==========================================================================
    CHRISTIAN ADRIAN ACEVES PEREZ - CYBERSECURITY & SECOPS PORTFOLIO
-   AUTUMN CYBER THEME (DARK & LIGHT MODES)
+   AUTUMN CYBER THEME (WITH SIEM v2.0 INTERLEAVED CONTRAST & OPAQUE WHITE)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap');
 
 :root {
-  /* Dark Mode Default - Autumn Obsidian */
-  --bg-dark: #0A0C10;
-  --bg-card: rgba(18, 22, 30, 0.85);
-  --bg-card-hover: rgba(28, 33, 46, 0.98);
+  /* DARK MODE DEFAULT (Basado en SIEM v2.0 #0A0C0F) */
+  --bg-dark: #0A0C0F;
+  --bg-card: rgba(18, 22, 30, 0.88);
+  --bg-card-hover: rgba(28, 34, 48, 0.98);
   --bg-surface: #141822;
+  --bg-header: #141824; /* Header más claro en modo oscuro para intercalar */
+  --header-text: #F3F4F6;
   --bg-code: #0D1017;
   
   /* Accents - Burnt Orange / Leaf Amber / Terracotta */
@@ -35,8 +37,8 @@
   /* Borders & Shadows */
   --border-subtle: rgba(224, 109, 39, 0.18);
   --border-glow: rgba(224, 109, 39, 0.45);
-  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  --card-hover-shadow: 0 15px 35px rgba(224, 109, 39, 0.2);
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --card-hover-shadow: 0 15px 35px rgba(224, 109, 39, 0.22);
 
   /* Fonts */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -44,15 +46,17 @@
   --font-mono: 'Fira Code', monospace;
 }
 
-/* Light Mode Overrides */
+/* LIGHT MODE OVERRIDES (Basado en blanco opaco #F4F5F7 de SIEM Dashboard) */
 [data-theme="light"] {
-  --bg-dark: #F8FAFC;
+  --bg-dark: #F4F5F7; /* Blanco opaco elegante de SIEM v2.0 */
   --bg-card: #FFFFFF;
   --bg-card-hover: #FFFFFF;
-  --bg-surface: #F1F5F9;
-  --bg-code: #111827; /* Dark terminal for code readability */
+  --bg-surface: #E5E7EB;
+  --bg-header: #0A0C0F; /* BARRA SUPERIOR OSCURA PARA INTERCALAR CON FONDO BLANCO */
+  --header-text: #FFFFFF;
+  --bg-code: #0D1017; /* Terminal siempre oscura */
   
-  /* Accents - Vibrant Autumn Orange & Deep Warm Terracotta */
+  /* Accents - Vibrant Autumn Orange & Deep Terracotta */
   --autumn-orange: #D95B16;
   --autumn-orange-glow: rgba(217, 91, 22, 0.18);
   --autumn-amber: #D97706;
@@ -60,14 +64,14 @@
   --autumn-gold: #B45309;
   
   /* Text */
-  --text-main: #0F172A;
-  --text-dim: #475569;
-  --text-subtle: #64748B;
+  --text-main: #111827;
+  --text-dim: #374151;
+  --text-subtle: #6B7280;
   
   /* Borders & Shadows */
   --border-subtle: rgba(217, 91, 22, 0.22);
   --border-glow: rgba(217, 91, 22, 0.5);
-  --card-shadow: 0 4px 20px rgba(217, 91, 22, 0.08);
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   --card-hover-shadow: 0 10px 25px rgba(217, 91, 22, 0.2);
 }
 
@@ -97,8 +101,8 @@ body {
 
 [data-theme="light"] body {
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(217, 91, 22, 0.06) 0%, transparent 50%),
-    radial-gradient(circle at 85% 75%, rgba(217, 119, 6, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 15% 15%, rgba(217, 91, 22, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 85% 75%, rgba(217, 119, 6, 0.04) 0%, transparent 50%);
   background-attachment: fixed;
 }
 
@@ -113,24 +117,20 @@ a:hover {
 }
 
 /* ==========================================================================
-   GLOBAL HEADER & THEME TOGGLE BUTTON
+   GLOBAL HEADER (BARRA INTERCALADA) & THEME TOGGLE
    ========================================================================== */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(10, 12, 16, 0.92);
+  background: var(--bg-header);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-subtle);
   padding: 0.85rem 0;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-[data-theme="light"] .site-header {
-  background: rgba(248, 250, 252, 0.92);
-  border-bottom-color: rgba(217, 91, 22, 0.18);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .header-container {
@@ -149,7 +149,7 @@ a:hover {
   font-family: var(--font-heading);
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--text-main);
+  color: var(--header-text);
   letter-spacing: -0.5px;
 }
 
@@ -174,7 +174,7 @@ a:hover {
 }
 
 .nav-links-centered .nav-link {
-  color: var(--text-dim);
+  color: #9CA3AF;
   font-weight: 500;
   font-size: 0.95rem;
   transition: all 0.25s ease;
@@ -185,16 +185,20 @@ a:hover {
   gap: 0.45rem;
 }
 
+[data-theme="light"] .nav-links-centered .nav-link {
+  color: #D1D5DB; /* En barra oscura sobre fondo claro */
+}
+
 .nav-links-centered .nav-link:hover, 
 .nav-links-centered .nav-link.active {
-  color: var(--autumn-orange);
-  background: rgba(224, 109, 39, 0.12);
+  color: #FFFFFF;
+  background: rgba(224, 109, 39, 0.25);
   border: 1px solid var(--border-glow);
 }
 
 /* Theme Switcher Button */
 .theme-toggle-btn {
-  background: rgba(224, 109, 39, 0.12);
+  background: rgba(224, 109, 39, 0.18);
   border: 1px solid var(--border-glow);
   color: var(--autumn-orange);
   width: 40px;
@@ -378,6 +382,7 @@ a:hover {
   line-height: 1.65;
 }
 
+/* Intercalado de Botones */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -412,6 +417,12 @@ a:hover {
   border: 1px solid var(--border-subtle);
   transition: all 0.25s ease;
   text-decoration: none;
+}
+
+[data-theme="light"] .btn-secondary {
+  background: #0A0C0F; /* Botón oscuro en fondo claro */
+  color: #F3F4F6;
+  border-color: rgba(217, 91, 22, 0.4);
 }
 
 .btn-secondary:hover {
@@ -627,7 +638,7 @@ a:hover {
    ========================================================================== */
 
 .page-container {
-  max-width: 900px;
+  max-width: 920px;
   margin: 0 auto;
   padding: 2.5rem 1.5rem;
 }
@@ -731,11 +742,11 @@ a:hover {
    ========================================================================== */
 
 .site-footer {
-  background: var(--bg-surface);
+  background: var(--bg-header); /* Muestra contraste intercalado con el body */
   border-top: 1px solid var(--border-subtle);
   padding: 3rem 1.5rem;
   margin-top: auto;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .footer-container {
