@@ -1,20 +1,21 @@
 /* ==========================================================================
-   CARLOS A. PORTFOLIO - CYBERSECURITY & SECOPS - AUTUMN CYBER THEME
+   CHRISTIAN ADRIAN ACEVES PEREZ - CYBERSECURITY & SECOPS PORTFOLIO
+   AUTUMN CYBER OBSIDIAN THEME
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap');
 
 :root {
-  /* Color Palette - Autumn Cyber obsidian & burnt orange */
+  /* Color Palette - Autumn Obsidian & Burnt Orange */
   --bg-dark: #0A0C10;
   --bg-card: rgba(18, 22, 30, 0.85);
-  --bg-card-hover: rgba(26, 31, 42, 0.95);
+  --bg-card-hover: rgba(28, 33, 46, 0.98);
   --bg-surface: #141822;
   --bg-code: #0D1017;
   
   /* Accents - Burnt Orange / Leaf Amber / Terracotta */
   --autumn-orange: #E06D27;
-  --autumn-orange-glow: rgba(224, 109, 39, 0.25);
+  --autumn-orange-glow: rgba(224, 109, 39, 0.28);
   --autumn-amber: #F59E0B;
   --autumn-rust: #B84A15;
   --autumn-gold: #D97706;
@@ -32,8 +33,8 @@
   --text-subtle: #6B7280;
   
   /* Borders */
-  --border-subtle: rgba(224, 109, 39, 0.15);
-  --border-glow: rgba(224, 109, 39, 0.4);
+  --border-subtle: rgba(224, 109, 39, 0.18);
+  --border-glow: rgba(224, 109, 39, 0.45);
 
   /* Fonts */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -56,8 +57,8 @@ body {
   display: flex;
   flex-direction: column;
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(224, 109, 39, 0.06) 0%, transparent 40%),
-    radial-gradient(circle at 85% 75%, rgba(245, 158, 11, 0.04) 0%, transparent 40%);
+    radial-gradient(circle at 15% 15%, rgba(224, 109, 39, 0.07) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(245, 158, 11, 0.05) 0%, transparent 45%);
   background-attachment: fixed;
 }
 
@@ -73,88 +74,155 @@ a:hover {
 }
 
 /* ==========================================================================
-   HEADER & NAVIGATION
+   CENTERED SUBPAGE NAVIGATION MENU
    ========================================================================== */
 
-.site-header {
+.subpage-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(10, 12, 16, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(10, 12, 16, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-subtle);
-  padding: 1rem 0;
+  padding: 0.85rem 0;
 }
 
-.header-container {
+.header-container-centered {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
-.brand-logo {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: var(--font-heading);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--text-main);
-  letter-spacing: -0.5px;
-}
-
-.brand-logo .logo-accent {
-  color: var(--autumn-orange);
-}
-
-.brand-logo .badge-dot {
-  width: 9px;
-  height: 9px;
-  background-color: var(--autumn-orange);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--autumn-orange);
-  animation: pulse-dot 2s infinite ease-in-out;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.3); }
-}
-
-.nav-links {
+.nav-links-centered {
   display: flex;
   gap: 1.75rem;
   list-style: none;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.nav-link {
+.nav-links-centered .nav-link {
   color: var(--text-dim);
   font-weight: 500;
   font-size: 0.95rem;
-  transition: color 0.2s ease, border-color 0.2s ease;
-  padding: 0.25rem 0;
+  transition: all 0.25s ease;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.nav-links-centered .nav-link:hover, 
+.nav-links-centered .nav-link.active {
+  color: #FFF;
+  background: rgba(224, 109, 39, 0.18);
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 0 12px var(--autumn-orange-glow);
+}
+
+/* ==========================================================================
+   MAIN HOMEPAGE NAVIGATION CARDS (CARDS WITH HOVER)
+   ========================================================================== */
+
+.nav-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+  margin: 3rem 0;
+}
+
+.nav-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text-main);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-.nav-link:hover, .nav-link.active {
-  color: var(--autumn-orange);
-}
-
-.nav-link.active::after {
+.nav-card::before {
   content: '';
   position: absolute;
-  bottom: -4px;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--autumn-orange) 0%, var(--autumn-amber) 100%);
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.nav-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: var(--autumn-orange);
+  background: var(--bg-card-hover);
+  box-shadow: 0 15px 35px rgba(224, 109, 39, 0.2);
+  color: var(--text-main);
+}
+
+.nav-card:hover::before {
+  opacity: 1;
+}
+
+.nav-card-icon {
+  width: 54px;
+  height: 54px;
+  background: rgba(224, 109, 39, 0.12);
+  border: 1px solid var(--border-glow);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: var(--autumn-orange);
+  margin-bottom: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.nav-card:hover .nav-card-icon {
   background: var(--autumn-orange);
-  box-shadow: 0 0 8px var(--autumn-orange);
-  border-radius: 2px;
+  color: #FFF;
+  box-shadow: 0 0 16px var(--autumn-orange-glow);
+  transform: rotate(-4deg) scale(1.1);
+}
+
+.nav-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-card-arrow {
+  font-size: 1.1rem;
+  color: var(--autumn-orange);
+  transition: transform 0.3s ease;
+}
+
+.nav-card:hover .nav-card-arrow {
+  transform: translateX(6px);
+  color: var(--autumn-amber);
+}
+
+.nav-card-desc {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 /* ==========================================================================
@@ -162,7 +230,7 @@ a:hover {
    ========================================================================== */
 
 .hero-section {
-  padding: 4.5rem 1.5rem 3.5rem;
+  padding: 3.5rem 1.5rem 2.5rem;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
@@ -192,30 +260,32 @@ a:hover {
 
 .hero-title {
   font-family: var(--font-heading);
-  font-size: 3.2rem;
+  font-size: 3.1rem;
   font-weight: 800;
   line-height: 1.15;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   letter-spacing: -1px;
 }
 
 .hero-title .gradient-text {
-  background: linear-gradient(135deg, #F39C12 0%, #E06D27 50%, #B84A15 100%);
+  background: linear-gradient(135deg, #F59E0B 0%, #E06D27 50%, #B84A15 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.hero-description {
-  font-size: 1.15rem;
-  color: var(--text-dim);
-  margin-bottom: 2rem;
-  max-width: 600px;
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--autumn-amber);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
 }
 
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+.hero-description {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  margin-bottom: 1.75rem;
+  max-width: 620px;
+  line-height: 1.65;
 }
 
 .btn-primary {
@@ -228,14 +298,15 @@ a:hover {
   font-weight: 600;
   border-radius: 8px;
   box-shadow: 0 4px 15px var(--autumn-orange-glow);
-  transition: all 0.25 ease;
+  transition: all 0.25s ease;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(224, 109, 39, 0.4);
+  box-shadow: 0 6px 22px rgba(224, 109, 39, 0.45);
   color: #FFF;
 }
 
@@ -250,6 +321,7 @@ a:hover {
   border-radius: 8px;
   border: 1px solid var(--border-subtle);
   transition: all 0.25s ease;
+  text-decoration: none;
 }
 
 .btn-secondary:hover {
@@ -300,7 +372,7 @@ a:hover {
 .terminal-body {
   padding: 1.25rem;
   font-family: var(--font-mono);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   line-height: 1.7;
 }
 
@@ -413,7 +485,7 @@ a:hover {
   flex: 1;
 }
 
-/* One-Liner Execution Box in Tool Cards */
+/* Command Box for Tools */
 .cmd-box {
   background: var(--bg-code);
   border: 1px solid rgba(224, 109, 39, 0.25);
@@ -430,7 +502,7 @@ a:hover {
 .cmd-text {
   color: var(--autumn-amber);
   white-space: nowrap;
-  overflow: x-auto;
+  overflow-x: auto;
   margin-right: 0.5rem;
 }
 
@@ -459,11 +531,11 @@ a:hover {
 }
 
 /* ==========================================================================
-   SINGLE ARTICLE / POST / TOOL PAGE
+   PAGES / SINGLE CONTENT
    ========================================================================== */
 
 .page-container {
-  max-width: 860px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 2.5rem 1.5rem;
 }
@@ -488,6 +560,7 @@ a:hover {
   color: var(--text-dim);
   font-size: 0.9rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .content-body {
@@ -499,7 +572,7 @@ a:hover {
 .content-body h2 {
   font-family: var(--font-heading);
   font-size: 1.7rem;
-  margin: 2rem 0 1rem;
+  margin: 2.2rem 0 1rem;
   color: var(--autumn-orange);
   border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 0.4rem;
@@ -508,7 +581,7 @@ a:hover {
 .content-body h3 {
   font-family: var(--font-heading);
   font-size: 1.3rem;
-  margin: 1.5rem 0 0.75rem;
+  margin: 1.6rem 0 0.75rem;
   color: var(--autumn-amber);
 }
 
@@ -522,7 +595,7 @@ a:hover {
 }
 
 .content-body li {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.45rem;
 }
 
 .content-body pre {
@@ -593,7 +666,7 @@ a:hover {
 
 .social-link {
   color: var(--text-dim);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   transition: color 0.2s ease;
 }
 
@@ -612,15 +685,14 @@ a:hover {
   }
   
   .hero-title {
-    font-size: 2.3rem;
+    font-size: 2.2rem;
   }
   
-  .grid-2, .grid-3 {
+  .nav-card-grid {
     grid-template-columns: 1fr;
   }
-  
-  .header-container {
-    flex-direction: column;
-    gap: 1rem;
+
+  .grid-2, .grid-3 {
+    grid-template-columns: 1fr;
   }
 }

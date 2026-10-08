@@ -1,32 +1,46 @@
 ---
 layout: tool
-title: "SentinelX SIEM"
-category: "SIEM / Monitoring"
-language: "Python"
-description: "Sistema ligero de SIEM y detección de intrusiones para servidores Linux y entornos cloud."
-usage_summary: "Monitoreo continuo de syslog, auth.log y modsec audit logs con alertas instantáneas."
-one_liner: "wget -O - https://raw.githubusercontent.com/caap1234/SentinelX-SIEM/main/install.sh | bash"
+title: "SentinelX-SIEM"
+category: "SIEM & Monitoreo"
+language: "Python, FastAPI, PostgreSQL, Astro"
+description: "Sistema de gestión de eventos de seguridad (SIEM) ligero para la centralización y análisis de logs en tiempo real."
+usage_summary: "Inclusión de logs syslog, auth.log, Exim y ModSecurity con dashboard y alertas en tiempo real."
 ---
 
-## ¿Qué es SentinelX SIEM?
+## 📌 Resumen del Proyecto
 
-**SentinelX** es una solución de SIEM (*Security Information and Event Management*) ligera y modular desarrollada para servidores Linux. Permite centralizar la ingesta de logs, correlacionar eventos de autenticación y detectar patrones anómalos de fuerza bruta o escaneos web en tiempo real.
+**SentinelX-SIEM** es una solución de SIEM (*Security Information and Event Management*) desarrollada para la centralización, correlación y análisis de eventos de seguridad en entornos de servidores Linux y Web Hosting.
 
-### Características Principales
+Permite monitorear continuamente fuentes críticas de logs para detectar automáticamente intentos de fuerza bruta, escaneos de vulnerabilidades web y anomalías en servicios de correo.
 
-- **Ingesta en Tiempo Real:** Lectura continua de `auth.log`, `secure`, `exim_mainlog` y ModSecurity Audit Logs.
-- **Correlación de Eventos:** Detección de patrones múltiples fallidos de login SSH y HTTP.
-- **Bloqueo Automático:** Integración nativa con `ipset` e `iptables` / `CSF`.
-- **Alertas en Telegram / Discord:** Notificaciones inmediatas ante eventos críticos.
+---
 
-### Ejemplo de Uso
+## 🚀 Arquitectura Tecnológica
 
-Para ejecutar una verificación directa del estado e instalación automática en tu servidor:
+- **Backend:** Python 3 + FastAPI (procesamiento asíncrono de alto rendimiento).
+- **Base de Datos:** PostgreSQL (almacenamiento estructurado e indexado de eventos de seguridad).
+- **Frontend / Dashboard:** Astro + HTML/CSS moderno para una interfaz limpia e instantánea.
+- **Alertas & Notificaciones:** Integración con bots de Telegram y webhooks de Discord para alertas críticas inmediatas.
 
-```bash
-wget -O - https://raw.githubusercontent.com/caap1234/SentinelX-SIEM/main/install.sh | bash
-```
+---
 
-### Arquitectura
+## 🔑 Características Principales
 
-SentinelX utiliza un motor de expresiones regulares multihilo en Python 3 para analizar eventos sin generar sobrecarga de CPU en el servidor monitoreado.
+1. **Ingesta Multi-fuente:**
+   - Parsing en tiempo real de `/var/log/auth.log` (SSH).
+   - Monitoreo de `/var/log/exim_mainlog` (Ataques de spam saliente).
+   - Ingesta de ModSecurity Audit Logs (Firewall Web).
+
+2. **Correlación & Reglas Automatizadas:**
+   - Detección de patrones anómalos de login en ventanas de tiempo configurables.
+   - Cálculo del nivel de riesgo por dirección IP de origen.
+
+3. **Respuesta ante Incidentes:**
+   - Bloqueo automático mediante scripts de integración con `ipset` y `CSF` (*ConfigServer Security & Firewall*).
+
+---
+
+## 🔗 Enlace al Repositorio
+
+Puedes revisar el código fuente y la arquitectura completa en el repositorio de GitHub:
+👉 [https://github.com/caap1234/SentinelX-SIEM](https://github.com/caap1234/SentinelX-SIEM)

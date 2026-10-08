@@ -14,16 +14,25 @@ layout: default
     <h1 class="article-title">{{ page.title }}</h1>
     <p class="hero-description" style="margin-bottom: 1.5rem;">{{ page.description }}</p>
     
+    {% if page.one_liner %}
     <!-- Large One-Liner Box -->
     <div style="margin-top: 1.5rem;">
       <label style="display:block; font-family: var(--font-mono); font-size: 0.85rem; color: var(--autumn-orange); margin-bottom: 0.5rem; font-weight:600;">
-        <i class="fas fa-bolt"></i> Ejecución directa en terminal:
+        <i class="fas fa-terminal"></i> Ejecución directa en terminal:
       </label>
       <div class="cmd-box" style="padding: 1rem; font-size: 0.95rem;">
         <span class="cmd-text" id="tool-cmd">{{ page.one_liner }}</span>
         <button class="copy-btn" data-target="tool-cmd"><i class="far fa-copy"></i> Copiar Comando</button>
       </div>
     </div>
+    {% else %}
+    <!-- Single Project Button -->
+    <div style="margin-top: 1.5rem;">
+      <a href="https://github.com/caap1234/SentinelX-SIEM" target="_blank" class="btn-primary">
+        <i class="fab fa-github"></i> Ver Código Fuente en GitHub
+      </a>
+    </div>
+    {% endif %}
   </article>
 
   <div class="content-body">

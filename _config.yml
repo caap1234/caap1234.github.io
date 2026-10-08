@@ -1,11 +1,13 @@
-title: "Carlos A. | Cybersecurity & SecOps Engineer"
-email: "caap1234@github.io"
-description: "Portafolio profesional de Ciberseguridad, SecOps, Writeups de HTB y Herramientas de Automatización."
+title: "Christian Adrian Aceves Perez | Ciberseguridad & SecOps"
+email: "caap.222@gmail.com"
+description: "Portafolio profesional de Ciberseguridad, SecOps, Writeups de HTB/THM y Herramientas Open Source por Christian Adrian Aceves Perez (caap1234)."
 baseurl: ""
 url: "https://caap1234.github.io"
-author: "caap1234"
+author: "Christian Adrian Aceves Perez"
 github_username: "caap1234"
-linkedin_username: "carlos-alvarez"
+linkedin_username: "christian-adrian-aceves-perez"
+htb_profile: "536808"
+tryhackme_profile: "Qw3rty"
 
 collections:
   writeups:
