@@ -1,12 +1,12 @@
 /* ==========================================================================
    CHRISTIAN ADRIAN ACEVES PEREZ - CYBERSECURITY & SECOPS PORTFOLIO
-   AUTUMN CYBER OBSIDIAN THEME
+   AUTUMN CYBER THEME (DARK & LIGHT MODES)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap');
 
 :root {
-  /* Color Palette - Autumn Obsidian & Burnt Orange */
+  /* Dark Mode Default - Autumn Obsidian */
   --bg-dark: #0A0C10;
   --bg-card: rgba(18, 22, 30, 0.85);
   --bg-card-hover: rgba(28, 33, 46, 0.98);
@@ -32,14 +32,43 @@
   --text-dim: #9CA3AF;
   --text-subtle: #6B7280;
   
-  /* Borders */
+  /* Borders & Shadows */
   --border-subtle: rgba(224, 109, 39, 0.18);
   --border-glow: rgba(224, 109, 39, 0.45);
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --card-hover-shadow: 0 15px 35px rgba(224, 109, 39, 0.2);
 
   /* Fonts */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-heading: 'Outfit', sans-serif;
   --font-mono: 'Fira Code', monospace;
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] {
+  --bg-dark: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FFFFFF;
+  --bg-surface: #F1F5F9;
+  --bg-code: #111827; /* Dark terminal for code readability */
+  
+  /* Accents - Vibrant Autumn Orange & Deep Warm Terracotta */
+  --autumn-orange: #D95B16;
+  --autumn-orange-glow: rgba(217, 91, 22, 0.18);
+  --autumn-amber: #D97706;
+  --autumn-rust: #9A3412;
+  --autumn-gold: #B45309;
+  
+  /* Text */
+  --text-main: #0F172A;
+  --text-dim: #475569;
+  --text-subtle: #64748B;
+  
+  /* Borders & Shadows */
+  --border-subtle: rgba(217, 91, 22, 0.22);
+  --border-glow: rgba(217, 91, 22, 0.5);
+  --card-shadow: 0 4px 20px rgba(217, 91, 22, 0.08);
+  --card-hover-shadow: 0 10px 25px rgba(217, 91, 22, 0.2);
 }
 
 * {
@@ -56,9 +85,20 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] body {
   background-image: 
     radial-gradient(circle at 15% 15%, rgba(224, 109, 39, 0.07) 0%, transparent 45%),
     radial-gradient(circle at 85% 75%, rgba(245, 158, 11, 0.05) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+
+[data-theme="light"] body {
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(217, 91, 22, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 85% 75%, rgba(217, 119, 6, 0.05) 0%, transparent 50%);
   background-attachment: fixed;
 }
 
@@ -70,14 +110,13 @@ a {
 
 a:hover {
   color: var(--autumn-amber);
-  text-shadow: 0 0 8px var(--autumn-orange-glow);
 }
 
 /* ==========================================================================
-   CENTERED SUBPAGE NAVIGATION MENU
+   GLOBAL HEADER & THEME TOGGLE BUTTON
    ========================================================================== */
 
-.subpage-header {
+.site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -86,24 +125,52 @@ a:hover {
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-subtle);
   padding: 0.85rem 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.header-container-centered {
+[data-theme="light"] .site-header {
+  background: rgba(248, 250, 252, 0.92);
+  border-bottom-color: rgba(217, 91, 22, 0.18);
+}
+
+.header-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+.brand-logo .logo-accent {
+  color: var(--autumn-orange);
+}
+
+.brand-logo .badge-dot {
+  width: 9px;
+  height: 9px;
+  background-color: var(--autumn-orange);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--autumn-orange);
 }
 
 .nav-links-centered {
   display: flex;
-  gap: 1.75rem;
+  gap: 1.5rem;
   list-style: none;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
 .nav-links-centered .nav-link {
@@ -120,14 +187,37 @@ a:hover {
 
 .nav-links-centered .nav-link:hover, 
 .nav-links-centered .nav-link.active {
-  color: #FFF;
-  background: rgba(224, 109, 39, 0.18);
+  color: var(--autumn-orange);
+  background: rgba(224, 109, 39, 0.12);
   border: 1px solid var(--border-glow);
-  box-shadow: 0 0 12px var(--autumn-orange-glow);
+}
+
+/* Theme Switcher Button */
+.theme-toggle-btn {
+  background: rgba(224, 109, 39, 0.12);
+  border: 1px solid var(--border-glow);
+  color: var(--autumn-orange);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.15rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--autumn-orange);
+  color: #FFF;
+  transform: rotate(18deg) scale(1.1);
+  box-shadow: 0 0 14px var(--autumn-orange-glow);
 }
 
 /* ==========================================================================
-   MAIN HOMEPAGE NAVIGATION CARDS (CARDS WITH HOVER)
+   MAIN HOMEPAGE NAVIGATION CARDS
    ========================================================================== */
 
 .nav-card-grid {
@@ -149,7 +239,7 @@ a:hover {
   overflow: hidden;
   text-decoration: none;
   color: var(--text-main);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: var(--card-shadow);
 }
 
 .nav-card::before {
@@ -160,7 +250,7 @@ a:hover {
   width: 100%;
   height: 4px;
   background: linear-gradient(90deg, var(--autumn-orange) 0%, var(--autumn-amber) 100%);
-  opacity: 0.4;
+  opacity: 0.5;
   transition: opacity 0.3s ease;
 }
 
@@ -168,7 +258,7 @@ a:hover {
   transform: translateY(-8px) scale(1.01);
   border-color: var(--autumn-orange);
   background: var(--bg-card-hover);
-  box-shadow: 0 15px 35px rgba(224, 109, 39, 0.2);
+  box-shadow: var(--card-hover-shadow);
   color: var(--text-main);
 }
 
@@ -268,7 +358,7 @@ a:hover {
 }
 
 .hero-title .gradient-text {
-  background: linear-gradient(135deg, #F59E0B 0%, #E06D27 50%, #B84A15 100%);
+  background: linear-gradient(135deg, var(--autumn-amber) 0%, var(--autumn-orange) 50%, var(--autumn-rust) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -336,7 +426,7 @@ a:hover {
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
 .terminal-header {
@@ -345,7 +435,7 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .terminal-dots {
@@ -366,7 +456,7 @@ a:hover {
 .terminal-title {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: var(--text-subtle);
+  color: #9CA3AF;
 }
 
 .terminal-body {
@@ -374,13 +464,14 @@ a:hover {
   font-family: var(--font-mono);
   font-size: 0.86rem;
   line-height: 1.7;
+  color: #F3F4F6;
 }
 
-.t-prompt { color: var(--autumn-orange); font-weight: bold; }
-.t-cmd { color: var(--text-main); }
-.t-output { color: var(--text-dim); }
-.t-highlight { color: var(--autumn-amber); }
-.t-success { color: var(--green-easy); }
+.t-prompt { color: #E06D27; font-weight: bold; }
+.t-cmd { color: #F3F4F6; }
+.t-output { color: #9CA3AF; }
+.t-highlight { color: #F59E0B; }
+.t-success { color: #10B981; }
 
 /* ==========================================================================
    CARDS & SECTIONS
@@ -439,12 +530,13 @@ a:hover {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  box-shadow: var(--card-shadow);
 }
 
 .card:hover {
   transform: translateY(-4px);
   border-color: var(--border-glow);
-  box-shadow: 0 10px 25px rgba(224, 109, 39, 0.12);
+  box-shadow: var(--card-hover-shadow);
   background: var(--bg-card-hover);
 }
 
@@ -488,7 +580,7 @@ a:hover {
 /* Command Box for Tools */
 .cmd-box {
   background: var(--bg-code);
-  border: 1px solid rgba(224, 109, 39, 0.25);
+  border: 1px solid rgba(224, 109, 39, 0.3);
   border-radius: 8px;
   padding: 0.65rem 0.85rem;
   display: flex;
@@ -500,14 +592,14 @@ a:hover {
 }
 
 .cmd-text {
-  color: var(--autumn-amber);
+  color: #F59E0B;
   white-space: nowrap;
   overflow-x: auto;
   margin-right: 0.5rem;
 }
 
 .copy-btn {
-  background: rgba(224, 109, 39, 0.2);
+  background: rgba(224, 109, 39, 0.25);
   border: 1px solid var(--border-glow);
   color: var(--autumn-orange);
   padding: 0.3rem 0.6rem;
@@ -607,6 +699,7 @@ a:hover {
   margin: 1.5rem 0;
   font-family: var(--font-mono);
   font-size: 0.9rem;
+  color: #F3F4F6;
 }
 
 .content-body code {
@@ -621,7 +714,7 @@ a:hover {
 .content-body pre code {
   background: transparent;
   padding: 0;
-  color: var(--text-main);
+  color: #F3F4F6;
 }
 
 .content-body blockquote {
@@ -642,6 +735,7 @@ a:hover {
   border-top: 1px solid var(--border-subtle);
   padding: 3rem 1.5rem;
   margin-top: auto;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .footer-container {
@@ -694,5 +788,10 @@ a:hover {
 
   .grid-2, .grid-3 {
     grid-template-columns: 1fr;
+  }
+
+  .header-container {
+    flex-wrap: wrap;
+    gap: 0.75rem;
   }
 }

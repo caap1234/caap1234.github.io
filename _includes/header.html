@@ -1,15 +1,27 @@
-{% if page.url != '/' and page.layout != 'home' %}
-<header class="site-header subpage-header">
-  <div class="header-container-centered">
+<header class="site-header">
+  <div class="header-container">
+    <!-- Brand Logo -->
+    <a href="{{ '/' | relative_url }}" class="brand-logo">
+      <span class="badge-dot"></span>
+      <span>caap1234<span class="logo-accent">.sec</span></span>
+    </a>
+
+    <!-- Subpage Navigation Menu (Hidden on Homepage) -->
+    {% if page.url != '/' and page.layout != 'home' %}
     <nav>
       <ul class="nav-links-centered">
         <li><a href="{{ '/' | relative_url }}" class="nav-link"><i class="fas fa-house"></i> Inicio</a></li>
-        <li><a href="{{ '/about/' | relative_url }}" class="nav-link {% if page.url contains '/about/' %}active{% endif %}"><i class="fas fa-id-card"></i> Sobre Mí / CV</a></li>
+        <li><a href="{{ '/about/' | relative_url }}" class="nav-link {% if page.url contains '/about/' %}active{% endif %}"><i class="fas fa-id-card"></i> CV</a></li>
         <li><a href="{{ '/tools/' | relative_url }}" class="nav-link {% if page.url contains '/tools/' %}active{% endif %}"><i class="fas fa-terminal"></i> Herramientas</a></li>
-        <li><a href="{{ '/writeups/' | relative_url }}" class="nav-link {% if page.url contains '/writeups/' %}active{% endif %}"><i class="fas fa-cube"></i> Writeups HTB/THM</a></li>
-        <li><a href="{{ '/blog/' | relative_url }}" class="nav-link {% if page.url contains '/blog/' %}active{% endif %}"><i class="fas fa-newspaper"></i> Blog & SecOps</a></li>
+        <li><a href="{{ '/writeups/' | relative_url }}" class="nav-link {% if page.url contains '/writeups/' %}active{% endif %}"><i class="fas fa-cube"></i> Writeups</a></li>
+        <li><a href="{{ '/blog/' | relative_url }}" class="nav-link {% if page.url contains '/blog/' %}active{% endif %}"><i class="fas fa-newspaper"></i> Blog</a></li>
       </ul>
     </nav>
+    {% endif %}
+
+    <!-- Theme Switcher Button (Oscuro / Claro) -->
+    <button id="theme-toggle" class="theme-toggle-btn" title="Cambiar Tema (Oscuro / Claro)">
+      <i class="fas fa-moon" id="theme-icon"></i>
+    </button>
   </div>
 </header>
-{% endif %}

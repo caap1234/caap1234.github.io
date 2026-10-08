@@ -1,5 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Command Copy Functionality
+  // ==========================================================================
+  // THEME SWITCHER LOGIC (DARK / LIGHT MODE)
+  // ==========================================================================
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  
+  // 1. Check local storage or system preferences
+  const savedTheme = localStorage.getItem('theme');
+  const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  
+  let currentTheme = 'dark'; // Default to dark
+  if (savedTheme) {
+    currentTheme = savedTheme;
+  } else if (systemPrefersLight) {
+    currentTheme = 'light';
+  }
+  
+  // Apply initial theme
+  setTheme(currentTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const newTheme = (document.documentElement.getAttribute('data-theme') === 'light') ? 'dark' : 'light';
+      setTheme(newTheme);
+    });
+  }
+
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    
+    if (themeIcon) {
+      if (theme === 'light') {
+        themeIcon.className = 'fas fa-sun';
+        themeToggleBtn.setAttribute('title', 'Cambiar a Modo Oscuro');
+      } else {
+        themeIcon.className = 'fas fa-moon';
+        themeToggleBtn.setAttribute('title', 'Cambiar a Modo Claro');
+      }
+    }
+  }
+
+  // ==========================================================================
+  // COMMAND COPY FUNCTIONALITY
+  // ==========================================================================
   const copyButtons = document.querySelectorAll('.copy-btn');
   
   copyButtons.forEach(btn => {
@@ -35,7 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Filter Buttons for HTB Writeups
+  // ==========================================================================
+  // FILTER BUTTONS FOR HTB WRITEUPS
+  // ==========================================================================
   const filterBtns = document.querySelectorAll('.filter-btn');
   const writeupCards = document.querySelectorAll('.writeup-card');
 
