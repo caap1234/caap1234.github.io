@@ -5,7 +5,7 @@ category: "SecOps / WAF"
 language: "Bash"
 description: "Script de análisis y extracción estadística de ataques bloqueados en logs de ModSecurity."
 usage_summary: "Genera reportes de IPs atacantes, IDs de reglas disparadas y URIs objetivo."
-one_liner: "wget -O - https://raw.githubusercontent.com/caap1234/Chamba/main/secops/modsec_report.sh | bash"
+one_liner: "bash <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/secops/modsec_report.sh)"
 ---
 
 ## ModSecurity Report Analyzer
@@ -18,8 +18,8 @@ Script en Bash enfocado en la auditoría rápida de logs de **ModSecurity** en s
 - **Top IPs Atacantes:** Extrae las direcciones IP con mayor volumen de bloqueos.
 - **Rutas Objetivos:** Analiza los endpoints y URIs más atacados (`/wp-login.php`, `xmlrpc.php`, etc.).
 
-### Ejecución Directa
+### Ejecución Directa en Terminal
 
 ```bash
-wget -O - https://raw.githubusercontent.com/caap1234/Chamba/main/secops/modsec_report.sh | bash
+bash <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/secops/modsec_report.sh)
 ```
