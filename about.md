@@ -20,7 +20,7 @@ permalink: /about/
     <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem; flex-wrap: wrap;">
       <a href="https://github.com/caap1234" target="_blank" class="btn-secondary" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;"><i class="fab fa-github"></i> GitHub</a>
       <a href="https://linkedin.com/in/christian-adrian-aceves-perez" target="_blank" class="btn-secondary" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;"><i class="fab fa-linkedin"></i> LinkedIn</a>
-      <a href="https://app.hackthebox.com/profile/536808" target="_blank" class="btn-secondary" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;"><i class="fas fa-cube"></i> HackTheBox</a>
+      <a href="https://profile.hackthebox.com/profile/01a11c46-70c7-72a2-9a6a-a3a01f65b2f9?utm_medium=copy_url" target="_blank" class="btn-secondary" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;"><i class="fas fa-cube"></i> HackTheBox</a>
       <a href="https://tryhackme.com/p/Qw3rty" target="_blank" class="btn-secondary" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;"><i class="fas fa-terminal"></i> TryHackMe</a>
     </div>
   </article>
