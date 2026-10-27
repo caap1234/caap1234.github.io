@@ -5,6 +5,7 @@ category: "SIEM & Monitoreo Enterprise"
 language: "Python, FastAPI, Astro, PostgreSQL, OpenSearch, MinIO, NATS"
 description: "Plataforma Enterprise de Gestión de Eventos e Información de Seguridad (SIEM) ligera, escalable y optimizada para entornos Linux y cPanel/WHM."
 usage_summary: "Tri-almacenamiento (PostgreSQL + OpenSearch + MinIO S3), motor asíncrono NATS JetStream y alertas SOC en tiempo real."
+github_url: "https://github.com/caap1234/SIEM-SentinelXv2.0"
 ---
 
 <div class="page-container" style="padding-top: 0;">

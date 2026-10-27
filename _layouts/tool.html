@@ -28,7 +28,7 @@ layout: default
     {% else %}
     <!-- Single Project Button -->
     <div style="margin-top: 1.5rem;">
-      <a href="https://github.com/caap1234/SentinelX-SIEM" target="_blank" class="btn-primary">
+      <a href="{{ page.github_url | default: 'https://github.com/caap1234/Chamba' }}" target="_blank" class="btn-primary">
         <i class="fab fa-github"></i> Ver Código Fuente en GitHub
       </a>
     </div>
