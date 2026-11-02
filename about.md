@@ -8,7 +8,7 @@ permalink: /about/
   <article class="article-header">
     <h1 class="article-title">Christian Adrian Aceves Perez</h1>
     <p class="hero-subtitle" style="color: var(--autumn-amber); font-size: 1.25rem;">
-      Estudiante de Ingeniería en Ciberseguridad | SOC Analyst & Pentester Junior Candidate
+      Estudiante de Ingeniería en Ciberseguridad | SOC / Analista de Seguridad @ NEUBOX
     </p>
     <div class="article-meta" style="margin-top: 1rem; gap: 1rem;">
       <span><i class="fas fa-location-dot"></i> Zapopan, Jalisco, México</span>
@@ -28,18 +28,37 @@ permalink: /about/
   <div class="content-body">
     <h2><i class="fas fa-user-shield"></i> Resumen Profesional</h2>
     <p>
-      Estudiante de <strong>Ingeniería en Ciberseguridad</strong> con sólida base técnica en administración de servidores y soporte de Web Hosting. Poseo experiencia práctica en el aseguramiento de servicios críticos, mitigación de ataques y desarrollo de herramientas de monitoreo (SIEM). Busco mi primera oportunidad profesional como <strong>Analista SOC</strong> o <strong>Pentester Junior</strong> para aplicar mis conocimientos en respuesta ante incidentes y análisis de vulnerabilidades.
+      Estudiante de <strong>Ingeniería en Ciberseguridad</strong> y <strong>SOC / Analista de Seguridad</strong> en <strong>NEUBOX México</strong>. Cuento con una sólida trayectoria en administración de servidores Linux y hardening de servicios web hosting, combinada con experiencia práctica en monitoreo de seguridad, mitigación de ataques y respuesta ante incidentes. Especializado en el análisis de alertas, detección de amenazas (malware, phishing, botnets, DDoS), análisis de logs y desarrollo de herramientas de automatización para SecOps.
     </p>
 
     <h2><i class="fas fa-briefcase"></i> Experiencia Laboral</h2>
     
-    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-left: 4px solid var(--autumn-orange); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+    <!-- Puesto Actual: SOC / Analista de Seguridad -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-left: 4px solid var(--autumn-orange); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
         <div>
           <h3 style="margin: 0; color: var(--text-main); font-size: 1.3rem;">NEUBOX México</h3>
-          <p style="color: var(--autumn-amber); font-weight: 600; margin: 0.2rem 0;">Soporte Técnico Web Hosting</p>
+          <p style="color: var(--autumn-amber); font-weight: 600; margin: 0.2rem 0;">SOC / Analista de Seguridad</p>
         </div>
-        <span class="badge badge-secops"><i class="far fa-calendar"></i> Oct. 2023 – Actualidad</span>
+        <span class="badge badge-secops"><i class="far fa-calendar"></i> Oct. 2026 – Actualidad</span>
+      </div>
+
+      <ul>
+        <li><strong>Monitoreo y Detección de Amenazas:</strong> Monitoreo continuo y triaje de eventos y alertas de seguridad en flotas de servidores e infraestructura crítica de hosting y cloud.</li>
+        <li><strong>Respuesta ante Incidentes (IR):</strong> Investigación, contención y mitigación de incidentes de seguridad y abuso de servicios (phishing, compromiso de cuentas, inyecciones de malware, spam masivo).</li>
+        <li><strong>Análisis Forense & Threat Intelligence:</strong> Correlación y análisis profundo de logs de acceso web y correo (Apache, Exim, ModSecurity, syslog) para identificación, extracción y bloqueo de IoCs (Indicadores de Compromiso).</li>
+        <li><strong>Automatización SecOps:</strong> Desarrollo y optimización de herramientas y scripts automatizados en Python y Bash para respuesta rápida, extracción de evidencias y telemetría de seguridad.</li>
+      </ul>
+    </div>
+
+    <!-- Puesto Anterior: Soporte Técnico Web Hosting -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-left: 4px solid var(--border-subtle); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+        <div>
+          <h3 style="margin: 0; color: var(--text-main); font-size: 1.3rem;">NEUBOX México</h3>
+          <p style="color: var(--text-dim); font-weight: 600; margin: 0.2rem 0;">Soporte Técnico Web Hosting</p>
+        </div>
+        <span class="badge" style="background: rgba(255, 255, 255, 0.05); color: var(--text-subtle); border: 1px solid var(--border-subtle);"><i class="far fa-calendar"></i> Oct. 2023 – Oct. 2026</span>
       </div>
 
       <ul>
