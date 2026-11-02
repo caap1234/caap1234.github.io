@@ -1,44 +1,811 @@
 ---
 layout: default
-title: "Herramientas"
+title: "Investigator Command Generator & Herramientas"
 permalink: /tools/
 ---
 
 <div class="main-content">
-  <div class="article-header">
-    <h1 class="article-title"><i class="fas fa-terminal"></i> Mis Herramientas & Proyectos Open Source</h1>
-    <p class="hero-description">
-      Herramientas desarrolladas para SecOps, auditorías de seguridad, monitoreo SIEM y administración de servidores.
-    </p>
+  <!-- Encabezado Principal -->
+  <div class="article-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+    <div>
+      <h1 class="article-title" style="margin-bottom: 0.5rem;">
+        <i class="fas fa-shield-virus" style="color: var(--autumn-orange);"></i> Incident Response & Abuse Investigator
+      </h1>
+      <p class="hero-description" style="margin: 0; max-width: 780px;">
+        Generador interactivo de comandos de peritaje forense para servidores <strong>cPanel</strong>, <strong>DirectAdmin</strong>, <strong>Linux Genérico</strong> y <strong>Windows Server</strong>.
+      </p>
+    </div>
+    <div style="background: rgba(224, 109, 39, 0.15); border: 1px solid var(--border-glow); padding: 0.4rem 0.9rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; color: var(--autumn-orange); letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.4rem;">
+      <i class="fas fa-code-branch"></i> VERSIÓN 2.5 TOOLKIT
+    </div>
   </div>
 
-  <div class="grid-2">
-    {% for tool in site.tools %}
-    <div class="card">
-      <div class="card-tag-row">
-        <span class="badge badge-secops">{{ tool.category }}</span>
-        <span class="badge badge-tech">{{ tool.language }}</span>
+  <!-- PANEL SUPERIOR: DESCARGAR Y EJECUTAR (ESTILO GENERADOR) -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+    <!-- Caja Descargar -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--card-shadow);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+        <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.05em;">
+          <i class="fas fa-download" style="color: var(--autumn-amber);"></i> Descargar a /tmp
+        </span>
+        <button id="btn-copy-download" class="copy-btn" style="padding: 0.3rem 0.7rem; font-size: 0.78rem;" onclick="copyText('cmd-download', 'btn-copy-download')">
+          <i class="far fa-copy"></i> Copiar
+        </button>
       </div>
-      <h2 class="card-title"><a href="{{ tool.url | relative_url }}">{{ tool.title }}</a></h2>
-      <p class="card-desc">{{ tool.description }}</p>
-      
-      <div style="margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-dim);">
-        <strong><i class="fas fa-gear"></i> Uso:</strong> {{ tool.usage_summary }}
+      <div style="background: var(--bg-code); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 0.85rem 1rem; font-family: var(--font-mono); font-size: 0.84rem; color: #E5E7EB; overflow-x: auto; white-space: nowrap;">
+        <code id="cmd-download">cd /tmp/ && wget -O 01_abuse_mail.py https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/01_abuse_mail_investigator.py</code>
+      </div>
+    </div>
+
+    <!-- Caja Ejecutar (One-Liner destacado) -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--card-hover-shadow);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+        <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--autumn-orange); letter-spacing: 0.05em;">
+          <i class="fas fa-terminal"></i> Ejecución Directa (One-Liner)
+        </span>
+        <div style="display: flex; gap: 0.5rem;">
+          <button id="btn-reset" onclick="resetActiveTabForm()" style="background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--text-dim); padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.78rem; cursor: pointer; transition: all 0.2s;">
+            <i class="fas fa-undo"></i> Limpiar
+          </button>
+          <button id="btn-copy-exec" onclick="copyText('cmd-exec', 'btn-copy-exec')" style="background: var(--autumn-orange); border: 1px solid var(--autumn-orange); color: #FFFFFF; font-weight: 700; padding: 0.35rem 0.9rem; border-radius: 6px; font-size: 0.82rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; box-shadow: 0 4px 14px var(--autumn-orange-glow); transition: all 0.2s;">
+            <i class="fas fa-copy"></i> COPIAR COMANDO
+          </button>
+        </div>
+      </div>
+      <div style="background: var(--bg-code); border: 1px solid rgba(224, 109, 39, 0.3); border-radius: 8px; padding: 0.85rem 1rem; font-family: var(--font-mono); font-size: 0.85rem; color: #34D399; overflow-x: auto; white-space: nowrap;">
+        <code id="cmd-exec">python3 &lt;(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/01_abuse_mail_investigator.py)</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVEGACIÓN POR PESTAÑAS (TABS) -->
+  <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 0.5rem; margin-bottom: 1.5rem; overflow-x: auto; box-shadow: var(--card-shadow);">
+    <div id="tabs-container" style="display: flex; gap: 0.4rem; min-width: max-content;">
+      <button class="nav-tab active" onclick="switchToolTab('t01')"><i class="fas fa-envelope"></i> 01. Correo (Exim)</button>
+      <button class="nav-tab" onclick="switchToolTab('t02')"><i class="fas fa-globe"></i> 02. Accesos Web</button>
+      <button class="nav-tab" onclick="switchToolTab('t03')"><i class="fas fa-file-code"></i> 03. Malware & Archivos</button>
+      <button class="nav-tab" onclick="switchToolTab('t04')"><i class="fas fa-user-shield"></i> 04. Logins & SSH</button>
+      <button class="nav-tab" onclick="switchToolTab('t05')"><i class="fas fa-briefcase"></i> 05. Colector IRIS</button>
+      <button class="nav-tab" onclick="switchToolTab('t06')"><i class="fas fa-network-wired"></i> 06. DNS & Hosting</button>
+      <button class="nav-tab" onclick="switchToolTab('t07')"><i class="fas fa-stream"></i> 07. Correlacionador</button>
+      <button class="nav-tab" onclick="switchToolTab('t08')"><i class="fab fa-windows"></i> 08. Windows Server</button>
+      <button class="nav-tab" onclick="switchToolTab('t09')"><i class="fas fa-heartbeat"></i> 09. Salud Operativa</button>
+      <button class="nav-tab" onclick="switchToolTab('t_runner')"><i class="fas fa-bolt" style="color: var(--autumn-amber);"></i> Suite (Runner)</button>
+    </div>
+  </div>
+
+  <!-- CONTENEDOR DE FORMULARIOS REACTIVOS -->
+  <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.75rem; margin-bottom: 3.5rem; box-shadow: var(--card-shadow);">
+    
+    <!-- TAB 01: ABUSE MAIL -->
+    <div id="panel-t01" class="tool-panel">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">
+          01. Abuse Mail Investigator
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0;">
+          Auditoría de envíos salientes en Exim, Dovecot (IMAP/POP3), cwd de scripts PHP y rastreo de envíos desde Webmail (127.0.0.1) vía cabecera <code>X-Forwarded-For</code>.
+        </p>
       </div>
 
-      {% if tool.one_liner %}
-      <div class="cmd-box">
-        <span class="cmd-text">{{ tool.one_liner }}</span>
-        <button class="copy-btn"><i class="far fa-copy"></i> Copiar</button>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Entorno de Servidor <span class="tooltip" title="Detecta automáticamente si es cPanel o DirectAdmin o puedes forzarlo">(?)</span></label>
+          <select id="t01_server" onchange="updateCommand()">
+            <option value="auto" selected>Auto-detectar (cPanel / DirectAdmin)</option>
+            <option value="cpanel">cPanel / WHM (/var/log/exim_mainlog)</option>
+            <option value="directadmin">DirectAdmin (/var/log/exim/mainlog)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Cuenta de Correo Específica <span class="tooltip" title="Opcional. Para investigar una sola cuenta comprometida">(?)</span></label>
+          <input type="text" id="t01_email" placeholder="ej. usuario@dominio.com" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Dominio Completo <span class="tooltip" title="Opcional. Para investigar todos los correos de un dominio">(?)</span></label>
+          <input type="text" id="t01_domain" placeholder="ej. dominio.com" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Días hacia atrás <span class="tooltip" title="Rango de días a investigar en logs actuales y rotados">(?)</span></label>
+          <input type="number" id="t01_days" value="3" min="1" max="60" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Límite por ranking (Top N)</label>
+          <input type="number" id="t01_top" value="20" min="5" max="100" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Guardar reporte en archivo (opcional)</label>
+          <input type="text" id="t01_output" placeholder="/tmp/reporte_exim.txt" oninput="updateCommand()">
+        </div>
       </div>
-      {% else %}
-      <div style="margin-top: auto;">
-        <a href="{{ tool.url | relative_url }}" class="btn-primary" style="width: 100%; justify-content: center; font-size: 0.88rem;">
-          <i class="fas fa-eye"></i> Ver Proyecto & Detalles v2.0 &rarr;
-        </a>
-      </div>
-      {% endif %}
     </div>
-    {% endfor %}
+
+    <!-- TAB 02: WEB ACCESS -->
+    <div id="panel-t02" class="tool-panel" style="display: none;">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">
+          02. Web Access Investigator
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0;">
+          Inspección forense de domlogs de Apache/Nginx para detectar webshells, peticiones POST y actividad alrededor de un compromiso.
+        </p>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Servidor Web</label>
+          <select id="t02_server" onchange="updateCommand()">
+            <option value="auto" selected>Auto-detectar</option>
+            <option value="cpanel">cPanel (/etc/apache2/logs/domlogs/)</option>
+            <option value="directadmin">DirectAdmin (/var/log/httpd/domains/)</option>
+            <option value="generic">Linux Genérico (/var/log/apache2/ o nginx)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Dominio a Investigar</label>
+          <input type="text" id="t02_domain" placeholder="ej. cliente.com" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Archivo o Webshell Sospechosa</label>
+          <input type="text" id="t02_file" placeholder="ej. wso.php, shell.php, wp-login.php" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>IP Atacante a Filtrar</label>
+          <input type="text" id="t02_ip" placeholder="ej. 185.220.101.5" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Códigos HTTP</label>
+          <input type="text" id="t02_status" placeholder="ej. 200 o 200,403,500" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Fecha de Referencia ("YYYY-MM-DD HH:MM:SS")</label>
+          <input type="text" id="t02_time" placeholder="2026-11-02 14:30:00" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Ventana alrededor de la fecha (minutos)</label>
+          <input type="number" id="t02_window" value="60" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1.6rem;">
+          <input type="checkbox" id="t02_post_only" style="width: auto; cursor: pointer;" onchange="updateCommand()">
+          <label for="t02_post_only" style="margin: 0; cursor: pointer;">Exclusivamente peticiones con método <strong>POST</strong></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 03: MALWARE & FILE -->
+    <div id="panel-t03" class="tool-panel" style="display: none;">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">
+          03. Malware & File Investigator
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0;">
+          Escaneo de webshells con firmas (eval, base64, passthru), cálculo de hashes MD5/SHA256, permisos 777 y persistencia en cron y SSH.
+        </p>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Servidor</label>
+          <select id="t03_server" onchange="updateCommand()">
+            <option value="auto" selected>Auto-detectar</option>
+            <option value="cpanel">cPanel (/home/user/public_html)</option>
+            <option value="directadmin">DirectAdmin</option>
+            <option value="generic">Linux Genérico</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Usuario cPanel / DirectAdmin</label>
+          <input type="text" id="t03_user" placeholder="ej. usuario1" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Ruta Específica de Directorio</label>
+          <input type="text" id="t03_path" placeholder="ej. /home/usuario1/public_html" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Horas hacia atrás (modificaciones)</label>
+          <input type="number" id="t03_hours" placeholder="ej. 48 (dejar vacío para usar días)" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Días hacia atrás (si no se usan horas)</label>
+          <input type="number" id="t03_days" value="7" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1.6rem;">
+          <input type="checkbox" id="t03_deep_scan" style="width: auto; cursor: pointer;" onchange="updateCommand()">
+          <label for="t03_deep_scan" style="margin: 0; cursor: pointer;">Escaneo profundo de contenido en todos los archivos PHP</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 04: ACCOUNT ACCESS -->
+    <div id="panel-t04" class="tool-panel" style="display: none;">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">
+          04. Account Access Investigator
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0;">
+          Auditoría de inicios de sesión y acciones administrativas en cPanel, WHM, DirectAdmin y SSH.
+        </p>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Servidor</label>
+          <select id="t04_server" onchange="updateCommand()">
+            <option value="auto" selected>Auto-detectar</option>
+            <option value="cpanel">cPanel / WHM</option>
+            <option value="directadmin">DirectAdmin</option>
+            <option value="generic">SSH / Linux Genérico</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Usuario a Auditar</label>
+          <input type="text" id="t04_user" placeholder="ej. cliente1 o root" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>IP de Origen a Filtrar</label>
+          <input type="text" id="t04_ip" placeholder="ej. 198.51.100.25" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Días hacia atrás</label>
+          <input type="number" id="t04_days" value="7" oninput="updateCommand()">
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 05: ABUSE EVIDENCE COLLECTOR -->
+    <div id="panel-t05" class="tool-panel" style="display: none;">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">
+          05. Abuse Evidence Collector
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0;">
+          Recolector técnico para generar el expediente estructurado con metadatos, hashes y líneas de log listo para copiar en el ticket de IRIS.
+        </p>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>ID de Caso / Ticket IRIS</label>
+          <input type="text" id="t05_case_id" value="IRIS-9821" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Tipo de Incidente</label>
+          <select id="t05_abuse_type" onchange="updateCommand()">
+            <option value="malware" selected>Malware / Inyección de Webshells</option>
+            <option value="spam">Spam / Envíos Masivos</option>
+            <option value="phishing">Phishing</option>
+            <option value="bruteforce">Fuerza Bruta</option>
+            <option value="unauthorized_access">Acceso no autorizado</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Dominio Involucrado</label>
+          <input type="text" id="t05_domain" placeholder="ej. victima.com" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Cuenta de Hosting / Usuario</label>
+          <input type="text" id="t05_account" placeholder="ej. victima1" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>IP Atacante / Sospechosa</label>
+          <input type="text" id="t05_ip" placeholder="ej. 198.51.100.2" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Archivos Sospechosos (separados por coma)</label>
+          <input type="text" id="t05_files" placeholder="/home/victima/public_html/wso.php" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Rutas de Logs a extraer</label>
+          <input type="text" id="t05_log_files" placeholder="/etc/apache2/logs/domlogs/victima.com" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Filtro Grep en Logs</label>
+          <input type="text" id="t05_grep" placeholder="ej. wso.php" oninput="updateCommand()">
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 06: DNS & DOMAIN -->
+    <div id="panel-t06" class="tool-panel" style="display: none;">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">
+          06. DNS & Domain Investigator
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0;">
+          Resolución DNS (A, MX, SPF, DMARC), ASN de hosting, detección de proxies/CDNs y verificación de si apunta al servidor local.
+        </p>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Dominio a Auditar</label>
+          <input type="text" id="t06_domain" placeholder="ej. cliente.com" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Resolvers Públicos (separados por coma)</label>
+          <input type="text" id="t06_resolvers" value="8.8.8.8,1.1.1.1" oninput="updateCommand()">
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 07: CORRELATOR -->
+    <div id="panel-t07" class="tool-panel" style="display: none;">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">
+          07. Suspicious Activity Correlator
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0;">
+          Timeline unificado: Cruza IP, usuario, domlogs web, envíos Exim, logins Dovecot y modificaciones de archivos en una sola línea de tiempo cronológica.
+        </p>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Servidor</label>
+          <select id="t07_server" onchange="updateCommand()">
+            <option value="auto" selected>Auto-detectar</option>
+            <option value="cpanel">cPanel / WHM</option>
+            <option value="directadmin">DirectAdmin</option>
+            <option value="generic">Linux Genérico</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>IP Sospechosa</label>
+          <input type="text" id="t07_ip" placeholder="ej. 198.51.100.2" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Usuario</label>
+          <input type="text" id="t07_user" placeholder="ej. cliente1" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Dominio</label>
+          <input type="text" id="t07_domain" placeholder="ej. cliente.com" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Horas hacia atrás</label>
+          <input type="number" id="t07_hours" value="24" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Fecha de Referencia ("YYYY-MM-DD HH:MM:SS")</label>
+          <input type="text" id="t07_time" placeholder="2026-11-02 15:30:00" oninput="updateCommand()">
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 08: WINDOWS SERVER -->
+    <div id="panel-t08" class="tool-panel" style="display: none;">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">
+          08. Windows Server Investigator
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0;">
+          Auditoría de IIS W3C (.aspx, webshells), Eventos de seguridad (4624/4625), sesiones RDP, tareas programadas y SMTP en Windows.
+        </p>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Modo de Ejecución</label>
+          <select id="t08_mode" onchange="updateCommand()">
+            <option value="auto" selected>Auto-detectar (Live en Windows / Offline en Linux)</option>
+            <option value="live">Live (Ejecución directa en Windows Server)</option>
+            <option value="offline">Offline (Auditar logs IIS exportados en Linux/Mac)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Directorio de Logs IIS W3C</label>
+          <input type="text" id="t08_iis_dir" placeholder="C:\inetpub\logs\LogFiles\W3SVC1 o ./iis_logs" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>IP Cliente a Filtrar</label>
+          <input type="text" id="t08_ip" placeholder="ej. 198.51.100.5" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Días hacia atrás</label>
+          <input type="number" id="t08_days" value="3" oninput="updateCommand()">
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 09: SERVICE HEALTH -->
+    <div id="panel-t09" class="tool-panel" style="display: none;">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">
+          09. Service Health & Exposure Check
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0;">
+          Diagnóstico de procesos en /tmp, firmas de crypto-miners, conexiones salientes de spam directo (puerto 25) y salud operativa.
+        </p>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Servidor</label>
+          <select id="t09_server" onchange="updateCommand()">
+            <option value="auto" selected>Auto-detectar</option>
+            <option value="cpanel">cPanel / WHM</option>
+            <option value="directadmin">DirectAdmin</option>
+            <option value="generic">Linux Genérico</option>
+            <option value="windows">Windows Server</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1.6rem;">
+          <input type="checkbox" id="t09_miners" checked style="width: auto; cursor: pointer;" onchange="updateCommand()">
+          <label for="t09_miners" style="margin: 0; cursor: pointer;">Escanear procesos en búsqueda de crypto-miners y rutas temporales</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB RUNNER: SUITE COMPLETA -->
+    <div id="panel-t_runner" class="tool-panel" style="display: none;">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">
+          ⚡ Investigator Suite & Hub (run_investigator.py)
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0;">
+          Lanzador todo-en-uno que incluye menú interactivo. Si lo ejecutas vía One-liner en un servidor remoto, descarga automáticamente en segundo plano el script que elijas sin clonar nada.
+        </p>
+      </div>
+
+      <div style="background: rgba(224, 109, 39, 0.08); border-left: 4px solid var(--autumn-orange); padding: 1rem 1.25rem; border-radius: 6px; font-size: 0.9rem; color: var(--text-main); line-height: 1.6;">
+        <p style="margin: 0 0 0.5rem 0;"><strong><i class="fas fa-check-circle" style="color: var(--autumn-orange);"></i> Totalmente Autónomo:</strong></p>
+        <p style="margin: 0;">Ejecuta este comando en cualquier terminal de servidor (SSH de cPanel, DirectAdmin o consola de Windows) y obtendrás el menú completo para elegir qué investigar al instante.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CATÁLOGO GENERAL DE PROYECTOS Y HERRAMIENTAS -->
+  <div style="margin-top: 3rem; margin-bottom: 1.5rem; border-top: 1px solid var(--border-subtle); padding-top: 2.5rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+      <h2 style="font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin: 0;">
+        <i class="fas fa-folder-open" style="color: var(--autumn-amber);"></i> Catálogo Completo de Proyectos & Scripts
+      </h2>
+      <span style="font-size: 0.85rem; color: var(--text-dim);">Repositorio: <a href="https://github.com/caap1234/Chamba" target="_blank" style="color: var(--autumn-orange); text-decoration: none; font-weight: 600;">github.com/caap1234/Chamba</a></span>
+    </div>
+
+    <div class="grid-2">
+      {% for tool in site.tools %}
+      <div class="card">
+        <div class="card-tag-row">
+          <span class="badge badge-secops">{{ tool.category }}</span>
+          <span class="badge badge-tech">{{ tool.language }}</span>
+        </div>
+        <h3 class="card-title"><a href="{{ tool.url | relative_url }}">{{ tool.title }}</a></h3>
+        <p class="card-desc">{{ tool.description }}</p>
+        
+        <div style="margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-dim);">
+          <strong><i class="fas fa-gear"></i> Uso:</strong> {{ tool.usage_summary }}
+        </div>
+
+        {% if tool.one_liner %}
+        <div class="cmd-box">
+          <span class="cmd-text">{{ tool.one_liner }}</span>
+          <button class="copy-btn" onclick="copySnippet(this)"><i class="far fa-copy"></i> Copiar</button>
+        </div>
+        {% else %}
+        <div style="margin-top: auto;">
+          <a href="{{ tool.url | relative_url }}" class="btn-primary" style="width: 100%; justify-content: center; font-size: 0.88rem;">
+            <i class="fas fa-eye"></i> Ver Detalles &rarr;
+          </a>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
+
+<style>
+  .nav-tab {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.55rem 0.95rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .nav-tab:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .nav-tab.active {
+    background: var(--autumn-orange);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px var(--autumn-orange-glow);
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .form-group label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="number"],
+  .form-group select {
+    background: var(--bg-code);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    padding: 0.65rem 0.85rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: var(--autumn-orange);
+    box-shadow: 0 0 0 2px var(--autumn-orange-glow);
+  }
+  .tooltip {
+    color: var(--autumn-orange);
+    cursor: help;
+    font-size: 0.75rem;
+  }
+</style>
+
+<script>
+  let currentActiveTab = 't01';
+  const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/";
+
+  function switchToolTab(tabId) {
+    currentActiveTab = tabId;
+    document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tool-panel').forEach(p => p.style.display = 'none');
+
+    // Activar botón y panel
+    const btn = Array.from(document.querySelectorAll('.nav-tab')).find(b => b.getAttribute('onclick').includes(tabId));
+    if (btn) btn.classList.add('active');
+
+    const panel = document.getElementById('panel-' + tabId);
+    if (panel) panel.style.display = 'block';
+
+    updateCommand();
+  }
+
+  function updateCommand() {
+    let scriptFile = "01_abuse_mail_investigator.py";
+    let shortName = "01_abuse_mail.py";
+    let flags = [];
+
+    if (currentActiveTab === 't01') {
+      scriptFile = "01_abuse_mail_investigator.py";
+      shortName = "01_abuse_mail.py";
+      const srv = document.getElementById('t01_server').value;
+      if (srv !== 'auto') flags.push(`--server ${srv}`);
+      const em = document.getElementById('t01_email').value.trim();
+      if (em) flags.push(`--email ${em}`);
+      const dom = document.getElementById('t01_domain').value.trim();
+      if (dom) flags.push(`--domain ${dom}`);
+      const days = document.getElementById('t01_days').value.trim();
+      if (days && days !== '3') flags.push(`--days ${days}`);
+      const top = document.getElementById('t01_top').value.trim();
+      if (top && top !== '20') flags.push(`--top ${top}`);
+      const out = document.getElementById('t01_output').value.trim();
+      if (out) flags.push(`--output ${out}`);
+
+    } else if (currentActiveTab === 't02') {
+      scriptFile = "02_web_access_investigator.py";
+      shortName = "02_web_access.py";
+      const srv = document.getElementById('t02_server').value;
+      if (srv !== 'auto') flags.push(`--server ${srv}`);
+      const dom = document.getElementById('t02_domain').value.trim();
+      if (dom) flags.push(`--domain ${dom}`);
+      const fl = document.getElementById('t02_file').value.trim();
+      if (fl) flags.push(`--file ${fl}`);
+      const ip = document.getElementById('t02_ip').value.trim();
+      if (ip) flags.push(`--ip ${ip}`);
+      const st = document.getElementById('t02_status').value.trim();
+      if (st) flags.push(`--status ${st}`);
+      const tm = document.getElementById('t02_time').value.trim();
+      if (tm) flags.push(`--time "${tm}"`);
+      const win = document.getElementById('t02_window').value.trim();
+      if (win && win !== '60') flags.push(`--window-minutes ${win}`);
+      if (document.getElementById('t02_post_only').checked) flags.push('--post-only');
+
+    } else if (currentActiveTab === 't03') {
+      scriptFile = "03_malware_file_investigator.py";
+      shortName = "03_malware.py";
+      const srv = document.getElementById('t03_server').value;
+      if (srv !== 'auto') flags.push(`--server ${srv}`);
+      const usr = document.getElementById('t03_user').value.trim();
+      if (usr) flags.push(`--user ${usr}`);
+      const pth = document.getElementById('t03_path').value.trim();
+      if (pth) flags.push(`--path ${pth}`);
+      const hrs = document.getElementById('t03_hours').value.trim();
+      if (hrs) {
+        flags.push(`--hours ${hrs}`);
+      } else {
+        const days = document.getElementById('t03_days').value.trim();
+        if (days && days !== '7') flags.push(`--days ${days}`);
+      }
+      if (document.getElementById('t03_deep_scan').checked) flags.push('--deep-scan');
+
+    } else if (currentActiveTab === 't04') {
+      scriptFile = "04_account_access_investigator.py";
+      shortName = "04_account_access.py";
+      const srv = document.getElementById('t04_server').value;
+      if (srv !== 'auto') flags.push(`--server ${srv}`);
+      const usr = document.getElementById('t04_user').value.trim();
+      if (usr) flags.push(`--user ${usr}`);
+      const ip = document.getElementById('t04_ip').value.trim();
+      if (ip) flags.push(`--ip ${ip}`);
+      const days = document.getElementById('t04_days').value.trim();
+      if (days && days !== '7') flags.push(`--days ${days}`);
+
+    } else if (currentActiveTab === 't05') {
+      scriptFile = "05_abuse_evidence_collector.py";
+      shortName = "05_evidence_collector.py";
+      const cid = document.getElementById('t05_case_id').value.trim();
+      if (cid) flags.push(`--case-id ${cid}`);
+      const atype = document.getElementById('t05_abuse_type').value;
+      if (atype) flags.push(`--abuse-type ${atype}`);
+      const dom = document.getElementById('t05_domain').value.trim();
+      if (dom) flags.push(`--domain ${dom}`);
+      const acc = document.getElementById('t05_account').value.trim();
+      if (acc) flags.push(`--account ${acc}`);
+      const ip = document.getElementById('t05_ip').value.trim();
+      if (ip) flags.push(`--ip ${ip}`);
+      const fls = document.getElementById('t05_files').value.trim();
+      if (fls) flags.push(`--files ${fls}`);
+      const lfs = document.getElementById('t05_log_files').value.trim();
+      if (lfs) flags.push(`--log-files ${lfs}`);
+      const grp = document.getElementById('t05_grep').value.trim();
+      if (grp) flags.push(`--grep ${grp}`);
+
+    } else if (currentActiveTab === 't06') {
+      scriptFile = "06_dns_domain_investigator.py";
+      shortName = "06_dns_domain.py";
+      const dom = document.getElementById('t06_domain').value.trim();
+      if (dom) flags.push(`--domain ${dom}`);
+      const res = document.getElementById('t06_resolvers').value.trim();
+      if (res && res !== '8.8.8.8,1.1.1.1') flags.push(`--resolvers ${res}`);
+
+    } else if (currentActiveTab === 't07') {
+      scriptFile = "07_suspicious_activity_correlator.py";
+      shortName = "07_correlator.py";
+      const srv = document.getElementById('t07_server').value;
+      if (srv !== 'auto') flags.push(`--server ${srv}`);
+      const ip = document.getElementById('t07_ip').value.trim();
+      if (ip) flags.push(`--ip ${ip}`);
+      const usr = document.getElementById('t07_user').value.trim();
+      if (usr) flags.push(`--user ${usr}`);
+      const dom = document.getElementById('t07_domain').value.trim();
+      if (dom) flags.push(`--domain ${dom}`);
+      const hrs = document.getElementById('t07_hours').value.trim();
+      if (hrs && hrs !== '24') flags.push(`--hours ${hrs}`);
+      const tm = document.getElementById('t07_time').value.trim();
+      if (tm) flags.push(`--time "${tm}"`);
+
+    } else if (currentActiveTab === 't08') {
+      scriptFile = "08_windows_server_investigator.py";
+      shortName = "08_windows.py";
+      const md = document.getElementById('t08_mode').value;
+      if (md !== 'auto') flags.push(`--mode ${md}`);
+      const iis = document.getElementById('t08_iis_dir').value.trim();
+      if (iis) flags.push(`--iis-dir "${iis}"`);
+      const ip = document.getElementById('t08_ip').value.trim();
+      if (ip) flags.push(`--ip ${ip}`);
+      const days = document.getElementById('t08_days').value.trim();
+      if (days && days !== '3') flags.push(`--days ${days}`);
+
+    } else if (currentActiveTab === 't09') {
+      scriptFile = "09_service_health_check.py";
+      shortName = "09_health_check.py";
+      const srv = document.getElementById('t09_server').value;
+      if (srv !== 'auto') flags.push(`--server ${srv}`);
+      if (document.getElementById('t09_miners').checked) flags.push('--check-miners');
+
+    } else if (currentActiveTab === 't_runner') {
+      scriptFile = "run_investigator.py";
+      shortName = "run_investigator.py";
+    }
+
+    const fullUrl = GITHUB_RAW_BASE + scriptFile;
+    const downloadCmd = `cd /tmp/ && wget -O ${shortName} ${fullUrl}`;
+    const flagString = flags.length > 0 ? " " + flags.join(" ") : "";
+    const execCmd = `python3 <(wget -qO- ${fullUrl})${flagString}`;
+
+    document.getElementById('cmd-download').textContent = downloadCmd;
+    document.getElementById('cmd-exec').textContent = execCmd;
+  }
+
+  function resetActiveTabForm() {
+    const panel = document.getElementById('panel-' + currentActiveTab);
+    if (!panel) return;
+    const inputs = panel.querySelectorAll('input, select');
+    inputs.forEach(el => {
+      if (el.type === 'checkbox') {
+        el.checked = el.defaultChecked;
+      } else {
+        el.value = el.defaultValue || '';
+      }
+    });
+    updateCommand();
+  }
+
+  function copyText(elementId, btnId) {
+    const text = document.getElementById(elementId).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById(btnId);
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check"></i> ¡COPIADO!';
+      btn.style.background = '#10B981';
+      btn.style.borderColor = '#10B981';
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+        btn.style.borderColor = '';
+      }, 1800);
+    });
+  }
+
+  function copySnippet(btn) {
+    const cmdText = btn.parentElement.querySelector('.cmd-text').innerText;
+    navigator.clipboard.writeText(cmdText).then(() => {
+      btn.innerHTML = '<i class="fas fa-check"></i> Copiado';
+      setTimeout(() => {
+        btn.innerHTML = '<i class="far fa-copy"></i> Copiar';
+      }, 1500);
+    });
+  }
+
+  // Inicializar al cargar
+  document.addEventListener('DOMContentLoaded', updateCommand);
+</script>
