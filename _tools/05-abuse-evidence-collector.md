@@ -17,3 +17,4 @@ Especialmente diseñado para estandarizar el levantamiento de evidencia técnica
 python3 <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/05_abuse_evidence_collector.py) --case-id IRIS-9821 \
     --domain cliente.com --abuse-type malware --files /home/cliente/public_html/shell.php
 ```
+

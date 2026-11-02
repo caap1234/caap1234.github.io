@@ -19,3 +19,4 @@ python3 <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/inves
 # Filtrar solo peticiones POST
 python3 <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/02_web_access_investigator.py) --domain cliente.com --post-only
 ```
+

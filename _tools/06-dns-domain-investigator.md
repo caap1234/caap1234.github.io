@@ -16,3 +16,4 @@ Permite diagnosticar la configuración de DNS, registros de correo y verificar l
 # Diagnóstico de dominio
 python3 <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/06_dns_domain_investigator.py) --domain cliente.com
 ```
+

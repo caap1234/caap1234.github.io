@@ -29,3 +29,4 @@ python3 <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/inves
 # Investigar una cuenta de correo comprometida
 python3 <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/01_abuse_mail_investigator.py) --email ventas@cliente.com --days 5
 ```
+

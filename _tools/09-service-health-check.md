@@ -19,3 +19,4 @@ python3 <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/inves
 # Detección de mineros y conexiones salientes de spam
 python3 <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/09_service_health_check.py) --check-miners
 ```
+

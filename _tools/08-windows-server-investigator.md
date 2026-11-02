@@ -19,3 +19,4 @@ python 08_windows_server_investigator.py --days 3
 # Modo offline en Linux con logs de IIS exportados
 python3 08_windows_server_investigator.py --mode offline --iis-dir /ruta/a/W3SVC1
 ```
+

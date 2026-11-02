@@ -19,3 +19,4 @@ python3 <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/inves
 # Auditar accesos desde una IP sospechosa
 python3 <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/04_account_access_investigator.py) --ip 198.51.100.25
 ```
+

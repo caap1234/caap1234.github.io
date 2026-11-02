@@ -27,3 +27,4 @@ O con `curl`:
 ```bash
 python3 <(curl -sL https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/run_investigator.py)
 ```
+

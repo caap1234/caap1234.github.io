@@ -16,3 +16,4 @@ Une las piezas de un ataque para descubrir el vector inicial de acceso, la subid
 # Correlacionar actividad de una IP en las últimas 24 horas
 python3 <(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/07_suspicious_activity_correlator.py) --server cpanel --ip 198.51.100.2 --hours 24
 ```
+
