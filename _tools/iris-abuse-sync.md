@@ -36,7 +36,7 @@ github_url: "https://github.com/caap1234/Chamba/tree/main/secops/iris_abuse_sync
   <div class="content-body">
     <h2><i class="fas fa-eye"></i> Resumen General</h2>
     <p>
-      <strong>DFIR-IRIS Abuse Sync</strong> es una solución integral desarrollada para optimizar y estandarizar las operaciones del Centro de Operaciones de Seguridad (SOC) y el área de Abuso / SecOps en <strong>NEUBOX</strong> y <strong>Hospedando</strong>.
+      <strong>DFIR-IRIS Abuse Sync</strong> es una solución integral desarrollada para optimizar y estandarizar las operaciones del Centro de Operaciones de Seguridad (SOC) y el área de Abuso / SecOps en entornos multi-tenant y proveedores de infraestructura web y hosting.
     </p>
     <p>
       La plataforma centraliza la recepción multicanal de denuncias (Zammad, WHMCS, IMAP, PDFs, OCR), clasifica incidentes mediante un modelo normativo de <strong>4 ejes independientes</strong>, proporciona una <strong>bitácora forense unificada en tiempo real con editor WYSIWYG</strong>, ejecuta <strong>11 playbooks supervisados</strong> de mitigación y sincroniza automáticamente notas, evidencias y metadatos con <strong>DFIR-IRIS</strong>.
