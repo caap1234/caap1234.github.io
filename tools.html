@@ -6,13 +6,13 @@ permalink: /tools/
 
 <div class="main-content">
   <!-- Encabezado Principal -->
-  <div class="article-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+  <div class="article-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
     <div>
       <h1 class="article-title" style="margin-bottom: 0.5rem;">
         <i class="fas fa-shield-virus" style="color: var(--autumn-orange);"></i> Incident Response & Abuse Investigator
       </h1>
-      <p class="hero-description" style="margin: 0; max-width: 780px;">
-        Generador interactivo de comandos de peritaje forense para servidores <strong>cPanel</strong>, <strong>DirectAdmin</strong>, <strong>Linux Genérico</strong> y <strong>Windows Server</strong>.
+      <p class="hero-description" style="margin: 0; max-width: 820px;">
+        Generador interactivo de comandos <strong>One-Liner</strong> para investigación y peritaje forense en <strong>cPanel</strong>, <strong>DirectAdmin</strong>, <strong>Linux Genérico</strong> y <strong>Windows Server</strong>.
       </p>
     </div>
     <div style="background: rgba(224, 109, 39, 0.15); border: 1px solid var(--border-glow); padding: 0.4rem 0.9rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; color: var(--autumn-orange); letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.4rem;">
@@ -20,41 +20,42 @@ permalink: /tools/
     </div>
   </div>
 
-  <!-- PANEL SUPERIOR: DESCARGAR Y EJECUTAR (ESTILO GENERADOR) -->
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
-    <!-- Caja Descargar -->
-    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--card-shadow);">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-        <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.05em;">
-          <i class="fas fa-download" style="color: var(--autumn-amber);"></i> Descargar a /tmp
+  <!-- PANEL SUPERIOR: COMANDO ONE-LINER LISTO PARA COPIAR Y EJECUTAR (FULL-WIDTH) -->
+  <div style="background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 14px; padding: 1.35rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--card-hover-shadow);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.75rem;">
+      <!-- Lado izquierdo: Título y Selector Wget / Curl -->
+      <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+        <span style="font-size: 0.82rem; font-weight: 800; text-transform: uppercase; color: var(--autumn-orange); letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 0.45rem;">
+          <i class="fas fa-terminal"></i> COMANDO ONE-LINER DIRECTO
         </span>
-        <button id="btn-copy-download" class="copy-btn" style="padding: 0.3rem 0.7rem; font-size: 0.78rem;" onclick="copyText('cmd-download', 'btn-copy-download')">
-          <i class="far fa-copy"></i> Copiar
-        </button>
-      </div>
-      <div style="background: var(--bg-code); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 0.85rem 1rem; font-family: var(--font-mono); font-size: 0.84rem; color: #E5E7EB; overflow-x: auto; white-space: nowrap;">
-        <code id="cmd-download">cd /tmp/ && wget -O 01_abuse_mail.py https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/01_abuse_mail_investigator.py</code>
-      </div>
-    </div>
-
-    <!-- Caja Ejecutar (One-Liner destacado) -->
-    <div style="background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--card-hover-shadow);">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-        <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--autumn-orange); letter-spacing: 0.05em;">
-          <i class="fas fa-terminal"></i> Ejecución Directa (One-Liner)
-        </span>
-        <div style="display: flex; gap: 0.5rem;">
-          <button id="btn-reset" onclick="resetActiveTabForm()" style="background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--text-dim); padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.78rem; cursor: pointer; transition: all 0.2s;">
-            <i class="fas fa-undo"></i> Limpiar
+        <div style="display: inline-flex; background: var(--bg-code); padding: 0.2rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+          <button id="toggle-wget" onclick="setFetchTool('wget')" class="tool-toggle active" style="padding: 0.25rem 0.65rem; font-size: 0.78rem; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s;">
+            wget
           </button>
-          <button id="btn-copy-exec" onclick="copyText('cmd-exec', 'btn-copy-exec')" style="background: var(--autumn-orange); border: 1px solid var(--autumn-orange); color: #FFFFFF; font-weight: 700; padding: 0.35rem 0.9rem; border-radius: 6px; font-size: 0.82rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; box-shadow: 0 4px 14px var(--autumn-orange-glow); transition: all 0.2s;">
-            <i class="fas fa-copy"></i> COPIAR COMANDO
+          <button id="toggle-curl" onclick="setFetchTool('curl')" class="tool-toggle" style="padding: 0.25rem 0.65rem; font-size: 0.78rem; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; background: transparent; color: var(--text-dim);">
+            curl
           </button>
         </div>
       </div>
-      <div style="background: var(--bg-code); border: 1px solid rgba(224, 109, 39, 0.3); border-radius: 8px; padding: 0.85rem 1rem; font-family: var(--font-mono); font-size: 0.85rem; color: #34D399; overflow-x: auto; white-space: nowrap;">
-        <code id="cmd-exec">python3 &lt;(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/01_abuse_mail_investigator.py)</code>
+
+      <!-- Lado derecho: Botón Limpiar y Botón Copiar -->
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <button id="btn-reset" onclick="resetActiveTabForm()" style="background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--text-dim); padding: 0.45rem 0.85rem; border-radius: 8px; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.35rem;">
+          <i class="fas fa-undo"></i> Limpiar
+        </button>
+        <button id="btn-copy-exec" onclick="copyOneLiner()" style="background: var(--autumn-orange); border: 1px solid var(--autumn-orange); color: #FFFFFF; font-weight: 700; padding: 0.5rem 1.15rem; border-radius: 8px; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 14px var(--autumn-orange-glow); transition: all 0.2s;">
+          <i class="fas fa-copy"></i> COPIAR COMANDO
+        </button>
       </div>
+    </div>
+
+    <!-- Cuadro de Código Terminal con el One-Liner Completo -->
+    <div style="background: var(--bg-code); border: 1px solid rgba(224, 109, 39, 0.35); border-radius: 10px; padding: 1.1rem 1.25rem; font-family: var(--font-mono); font-size: 0.9rem; color: #34D399; overflow-x: auto; white-space: nowrap; box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);">
+      <code id="cmd-exec">python3 &lt;(wget -qO- https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/01_abuse_mail_investigator.py)</code>
+    </div>
+
+    <div style="margin-top: 0.65rem; font-size: 0.78rem; color: var(--text-subtle); display: flex; align-items: center; gap: 0.4rem;">
+      <i class="fas fa-info-circle" style="color: var(--autumn-amber);"></i> Ejecución directa en memoria / pipe. No requiere clonar el repositorio ni guardar archivos en disco.
     </div>
   </div>
 
@@ -480,13 +481,13 @@ permalink: /tools/
           ⚡ Investigator Suite & Hub (run_investigator.py)
         </h2>
         <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0;">
-          Lanzador todo-en-uno que incluye menú interactivo. Si lo ejecutas vía One-liner en un servidor remoto, descarga automáticamente en segundo plano el script que elijas sin clonar nada.
+          Lanzador interactivo todo-en-uno. Si lo ejecutas en un servidor remoto, descarga automáticamente al vuelo el módulo que elijas sin clonar nada.
         </p>
       </div>
 
       <div style="background: rgba(224, 109, 39, 0.08); border-left: 4px solid var(--autumn-orange); padding: 1rem 1.25rem; border-radius: 6px; font-size: 0.9rem; color: var(--text-main); line-height: 1.6;">
         <p style="margin: 0 0 0.5rem 0;"><strong><i class="fas fa-check-circle" style="color: var(--autumn-orange);"></i> Totalmente Autónomo:</strong></p>
-        <p style="margin: 0;">Ejecuta este comando en cualquier terminal de servidor (SSH de cPanel, DirectAdmin o consola de Windows) y obtendrás el menú completo para elegir qué investigar al instante.</p>
+        <p style="margin: 0;">Copia el comando de arriba y pégalo directamente en la terminal SSH del servidor para abrir el menú interactivo.</p>
       </div>
     </div>
 
@@ -557,6 +558,10 @@ permalink: /tools/
     color: #FFFFFF;
     box-shadow: 0 4px 12px var(--autumn-orange-glow);
   }
+  .tool-toggle.active {
+    background: var(--autumn-orange) !important;
+    color: #FFFFFF !important;
+  }
   .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -602,14 +607,34 @@ permalink: /tools/
 
 <script>
   let currentActiveTab = 't01';
+  let activeFetchTool = 'wget';
   const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/caap1234/Chamba/main/investigators/";
+
+  function setFetchTool(tool) {
+    activeFetchTool = tool;
+    if (tool === 'wget') {
+      document.getElementById('toggle-wget').classList.add('active');
+      document.getElementById('toggle-wget').style.background = 'var(--autumn-orange)';
+      document.getElementById('toggle-wget').style.color = '#FFFFFF';
+      document.getElementById('toggle-curl').classList.remove('active');
+      document.getElementById('toggle-curl').style.background = 'transparent';
+      document.getElementById('toggle-curl').style.color = 'var(--text-dim)';
+    } else {
+      document.getElementById('toggle-curl').classList.add('active');
+      document.getElementById('toggle-curl').style.background = 'var(--autumn-orange)';
+      document.getElementById('toggle-curl').style.color = '#FFFFFF';
+      document.getElementById('toggle-wget').classList.remove('active');
+      document.getElementById('toggle-wget').style.background = 'transparent';
+      document.getElementById('toggle-wget').style.color = 'var(--text-dim)';
+    }
+    updateCommand();
+  }
 
   function switchToolTab(tabId) {
     currentActiveTab = tabId;
     document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tool-panel').forEach(p => p.style.display = 'none');
 
-    // Activar botón y panel
     const btn = Array.from(document.querySelectorAll('.nav-tab')).find(b => b.getAttribute('onclick').includes(tabId));
     if (btn) btn.classList.add('active');
 
@@ -621,12 +646,10 @@ permalink: /tools/
 
   function updateCommand() {
     let scriptFile = "01_abuse_mail_investigator.py";
-    let shortName = "01_abuse_mail.py";
     let flags = [];
 
     if (currentActiveTab === 't01') {
       scriptFile = "01_abuse_mail_investigator.py";
-      shortName = "01_abuse_mail.py";
       const srv = document.getElementById('t01_server').value;
       if (srv !== 'auto') flags.push(`--server ${srv}`);
       const em = document.getElementById('t01_email').value.trim();
@@ -642,7 +665,6 @@ permalink: /tools/
 
     } else if (currentActiveTab === 't02') {
       scriptFile = "02_web_access_investigator.py";
-      shortName = "02_web_access.py";
       const srv = document.getElementById('t02_server').value;
       if (srv !== 'auto') flags.push(`--server ${srv}`);
       const dom = document.getElementById('t02_domain').value.trim();
@@ -661,7 +683,6 @@ permalink: /tools/
 
     } else if (currentActiveTab === 't03') {
       scriptFile = "03_malware_file_investigator.py";
-      shortName = "03_malware.py";
       const srv = document.getElementById('t03_server').value;
       if (srv !== 'auto') flags.push(`--server ${srv}`);
       const usr = document.getElementById('t03_user').value.trim();
@@ -679,7 +700,6 @@ permalink: /tools/
 
     } else if (currentActiveTab === 't04') {
       scriptFile = "04_account_access_investigator.py";
-      shortName = "04_account_access.py";
       const srv = document.getElementById('t04_server').value;
       if (srv !== 'auto') flags.push(`--server ${srv}`);
       const usr = document.getElementById('t04_user').value.trim();
@@ -691,7 +711,6 @@ permalink: /tools/
 
     } else if (currentActiveTab === 't05') {
       scriptFile = "05_abuse_evidence_collector.py";
-      shortName = "05_evidence_collector.py";
       const cid = document.getElementById('t05_case_id').value.trim();
       if (cid) flags.push(`--case-id ${cid}`);
       const atype = document.getElementById('t05_abuse_type').value;
@@ -711,7 +730,6 @@ permalink: /tools/
 
     } else if (currentActiveTab === 't06') {
       scriptFile = "06_dns_domain_investigator.py";
-      shortName = "06_dns_domain.py";
       const dom = document.getElementById('t06_domain').value.trim();
       if (dom) flags.push(`--domain ${dom}`);
       const res = document.getElementById('t06_resolvers').value.trim();
@@ -719,7 +737,6 @@ permalink: /tools/
 
     } else if (currentActiveTab === 't07') {
       scriptFile = "07_suspicious_activity_correlator.py";
-      shortName = "07_correlator.py";
       const srv = document.getElementById('t07_server').value;
       if (srv !== 'auto') flags.push(`--server ${srv}`);
       const ip = document.getElementById('t07_ip').value.trim();
@@ -735,7 +752,6 @@ permalink: /tools/
 
     } else if (currentActiveTab === 't08') {
       scriptFile = "08_windows_server_investigator.py";
-      shortName = "08_windows.py";
       const md = document.getElementById('t08_mode').value;
       if (md !== 'auto') flags.push(`--mode ${md}`);
       const iis = document.getElementById('t08_iis_dir').value.trim();
@@ -747,22 +763,29 @@ permalink: /tools/
 
     } else if (currentActiveTab === 't09') {
       scriptFile = "09_service_health_check.py";
-      shortName = "09_health_check.py";
       const srv = document.getElementById('t09_server').value;
       if (srv !== 'auto') flags.push(`--server ${srv}`);
       if (document.getElementById('t09_miners').checked) flags.push('--check-miners');
 
     } else if (currentActiveTab === 't_runner') {
       scriptFile = "run_investigator.py";
-      shortName = "run_investigator.py";
     }
 
     const fullUrl = GITHUB_RAW_BASE + scriptFile;
-    const downloadCmd = `cd /tmp/ && wget -O ${shortName} ${fullUrl}`;
     const flagString = flags.length > 0 ? " " + flags.join(" ") : "";
-    const execCmd = `python3 <(wget -qO- ${fullUrl})${flagString}`;
+    
+    let execCmd = "";
+    if (currentActiveTab === 't08' && document.getElementById('t08_mode') && document.getElementById('t08_mode').value === 'live') {
+      // Windows Server PowerShell invocation
+      execCmd = `python <(curl.exe -sL ${fullUrl})${flagString}`;
+    } else {
+      if (activeFetchTool === 'curl') {
+        execCmd = `python3 <(curl -sL ${fullUrl})${flagString}`;
+      } else {
+        execCmd = `python3 <(wget -qO- ${fullUrl})${flagString}`;
+      }
+    }
 
-    document.getElementById('cmd-download').textContent = downloadCmd;
     document.getElementById('cmd-exec').textContent = execCmd;
   }
 
@@ -780,18 +803,18 @@ permalink: /tools/
     updateCommand();
   }
 
-  function copyText(elementId, btnId) {
-    const text = document.getElementById(elementId).textContent;
+  function copyOneLiner() {
+    const text = document.getElementById('cmd-exec').textContent;
     navigator.clipboard.writeText(text).then(() => {
-      const btn = document.getElementById(btnId);
+      const btn = document.getElementById('btn-copy-exec');
       const originalHTML = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-check"></i> ¡COPIADO!';
+      btn.innerHTML = '<i class="fas fa-check"></i> ¡COMANDO COPIADO!';
       btn.style.background = '#10B981';
       btn.style.borderColor = '#10B981';
       setTimeout(() => {
         btn.innerHTML = originalHTML;
-        btn.style.background = '';
-        btn.style.borderColor = '';
+        btn.style.background = 'var(--autumn-orange)';
+        btn.style.borderColor = 'var(--autumn-orange)';
       }, 1800);
     });
   }
