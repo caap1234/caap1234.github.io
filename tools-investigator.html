@@ -25,7 +25,7 @@ permalink: /tools/investigator/
       </p>
     </div>
     <div style="background: rgba(224, 109, 39, 0.15); border: 1px solid var(--border-glow); padding: 0.4rem 0.9rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; color: var(--autumn-orange); letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.4rem;">
-      <i class="fas fa-bolt"></i> VERSIÓN 2.5
+      <i class="fas fa-bolt"></i> VERSIÓN 2.6
     </div>
   </div>
 
@@ -80,6 +80,7 @@ permalink: /tools/investigator/
       <button class="nav-tab" onclick="switchToolTab('t07')"><i class="fas fa-stream"></i> 07. Correlacionador</button>
       <button class="nav-tab" onclick="switchToolTab('t08')"><i class="fab fa-windows"></i> 08. Windows Server</button>
       <button class="nav-tab" onclick="switchToolTab('t09')"><i class="fas fa-heartbeat"></i> 09. Salud Operativa</button>
+      <button class="nav-tab" onclick="switchToolTab('t10')"><i class="fas fa-history"></i> 10. Cambios DNS & Subdominios</button>
       <button class="nav-tab" onclick="switchToolTab('t_runner')"><i class="fas fa-bolt" style="color: var(--autumn-amber);"></i> Suite (Runner)</button>
     </div>
   </div>
@@ -483,6 +484,70 @@ permalink: /tools/investigator/
       </div>
     </div>
 
+    <!-- TAB 10: DNS & SUBDOMAIN CHANGES -->
+    <div id="panel-t10" class="tool-panel" style="display: none;">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">
+          10. DNS & Subdomain Changes Investigator
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0;">
+          Auditoría forense de cambios en zonas DNS (ZoneEdit, A, CNAME, TXT, MX, <code>mass_edit_zone</code>), creación de subdominios y dominios adicionales en logs actuales y rotados (<code>archive/access_log-*.gz</code>), extrayendo la IP real vía <code>X-Forwarded-For</code> y correlacionando con <code>/home/usuario/.lastlogin</code>.
+        </p>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Dominio o Subdominio <span class="tooltip" title="Opcional. Dominio base o subdominio creado (ej. wikumx.com o telsurpagos.wikumx.com)">(?)</span></label>
+          <input type="text" id="t10_domain" placeholder="ej. wikumx.com" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Usuario cPanel <span class="tooltip" title="Opcional. Usuario dueño de la cuenta (ej. wikumxco)">(?)</span></label>
+          <input type="text" id="t10_user" placeholder="ej. wikumxco" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Término de Búsqueda / Registro <span class="tooltip" title="Opcional. Nombre de registro, subdominio o palabra clave (ej. telsurpagos, mass_edit_zone)">(?)</span></label>
+          <input type="text" id="t10_search" placeholder="ej. telsurpagos" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>IP Específica a Rastrear <span class="tooltip" title="Opcional. IP sospechosa de origen (ej. 190.114.37.193)">(?)</span></label>
+          <input type="text" id="t10_ip" placeholder="ej. 190.114.37.193" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Fecha Específica <span class="tooltip" title="Opcional. Fecha exacta en formato YYYY-MM-DD o MM/DD (ej. 2026-10-15 o 10/15)">(?)</span></label>
+          <input type="text" id="t10_date" placeholder="ej. 2026-10-15 o 10/15" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Días hacia atrás <span class="tooltip" title="Rango de días a investigar (0 para inspeccionar todo el historial)">(?)</span></label>
+          <input type="number" id="t10_days" value="30" min="0" max="365" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>IPs a Excluir (Analista / Soporte) <span class="tooltip" title="Omite la IP de origen y cabeceras X-Forwarded-For que coincidan con estos prefijos (separados por coma)">(?)</span></label>
+          <input type="text" id="t10_exclude_ip" value="72.249.55." placeholder="72.249.55." oninput="updateCommand()">
+        </div>
+
+        <div class="form-group">
+          <label>Límite de fragmentos de log (Top N)</label>
+          <input type="number" id="t10_limit" value="200" min="10" max="500" oninput="updateCommand()">
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1.6rem;">
+          <input type="checkbox" id="t10_check_lastlogin" checked style="width: auto; cursor: pointer;" onchange="updateCommand()">
+          <label for="t10_check_lastlogin" style="margin: 0; cursor: pointer;">Correlacionar accesos persistentes en <code>/home/usuario/.lastlogin</code></label>
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1.6rem;">
+          <input type="checkbox" id="t10_archive" checked style="width: auto; cursor: pointer;" onchange="updateCommand()">
+          <label for="t10_archive" style="margin: 0; cursor: pointer;">Incluir logs rotados en <code>/usr/local/cpanel/logs/archive/</code></label>
+        </div>
+      </div>
+    </div>
+
     <!-- TAB RUNNER: SUITE COMPLETA -->
     <div id="panel-t_runner" class="tool-panel" style="display: none;">
       <div style="margin-bottom: 1.5rem;">
@@ -741,6 +806,27 @@ permalink: /tools/investigator/
       const srv = document.getElementById('t09_server').value;
       if (srv !== 'auto') flags.push(`--server ${srv}`);
       if (document.getElementById('t09_miners').checked) flags.push('--check-miners');
+
+    } else if (currentActiveTab === 't10') {
+      scriptFile = "10_dns_subdomain_changes_investigator.py";
+      const dom = document.getElementById('t10_domain').value.trim();
+      if (dom) flags.push(`--domain ${dom}`);
+      const usr = document.getElementById('t10_user').value.trim();
+      if (usr) flags.push(`--user ${usr}`);
+      const srch = document.getElementById('t10_search').value.trim();
+      if (srch) flags.push(`--search "${srch}"`);
+      const ip = document.getElementById('t10_ip').value.trim();
+      if (ip) flags.push(`--ip ${ip}`);
+      const dtVal = document.getElementById('t10_date').value.trim();
+      if (dtVal) flags.push(`--date "${dtVal}"`);
+      const days = document.getElementById('t10_days').value.trim();
+      if (days && days !== '30') flags.push(`--days ${days}`);
+      const exIp = document.getElementById('t10_exclude_ip').value.trim();
+      if (exIp && exIp !== '72.249.55.') flags.push(`--exclude-ip "${exIp}"`);
+      if (document.getElementById('t10_check_lastlogin').checked) flags.push('--check-lastlogin');
+      if (!document.getElementById('t10_archive').checked) flags.push('--no-archive');
+      const lim = document.getElementById('t10_limit').value.trim();
+      if (lim && lim !== '200') flags.push(`--limit ${lim}`);
 
     } else if (currentActiveTab === 't_runner') {
       scriptFile = "run_investigator.py";

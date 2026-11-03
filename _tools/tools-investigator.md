@@ -4,7 +4,7 @@ title: "Tools Investigator Suite"
 category: "SecOps / Incident Response"
 language: "Python, cPanel, DirectAdmin, Windows"
 description: "Suite integral y generador interactivo de comandos One-Liner para peritaje forense e investigación de incidentes de abuso en servidores cPanel, DirectAdmin y Windows Server."
-usage_summary: "9 módulos forenses (Exim, Domlogs, Webshells, Logins, Correlador, DNS, Windows IIS, Salud) ejecutables directamente en memoria sin clonar repositorios."
+usage_summary: "10 módulos forenses (Exim, Domlogs, Webshells, Logins, Colector, DNS, Correlador, Windows IIS, Salud, Cambios DNS/Subdominios) ejecutables directamente en memoria sin clonar repositorios."
 generator_url: "/tools/investigator/"
 custom_button_text: "Abrir Generador de Comandos One-Liner"
 ---
@@ -80,9 +80,37 @@ custom_button_text: "Abrir Generador de Comandos One-Liner"
       </div>
 
       <div class="card" style="padding: 1.25rem;">
+        <h3 style="font-size: 1.05rem; margin-top: 0; color: var(--autumn-orange);"><i class="fas fa-network-wired"></i> 06. DNS & Domain Investigator</h3>
+        <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0;">
+          Resolución DNS (A, MX, SPF, DMARC), detección de proveedores CDN y validación de apuntamiento local vs externo.
+        </p>
+      </div>
+
+      <div class="card" style="padding: 1.25rem;">
         <h3 style="font-size: 1.05rem; margin-top: 0; color: var(--autumn-orange);"><i class="fas fa-stream"></i> 07. Suspicious Activity Correlator</h3>
         <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0;">
           Timeline unificado: Cruza IP, usuario, logs web, envíos de correo y archivos modificados cronológicamente.
+        </p>
+      </div>
+
+      <div class="card" style="padding: 1.25rem;">
+        <h3 style="font-size: 1.05rem; margin-top: 0; color: var(--autumn-orange);"><i class="fab fa-windows"></i> 08. Windows Server Investigator</h3>
+        <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0;">
+          Logs IIS W3C, Eventos Windows 4624/4625, inicios RDP, tareas programadas y auditoría de servicios en Windows.
+        </p>
+      </div>
+
+      <div class="card" style="padding: 1.25rem;">
+        <h3 style="font-size: 1.05rem; margin-top: 0; color: var(--autumn-orange);"><i class="fas fa-heartbeat"></i> 09. Service Health Check</h3>
+        <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0;">
+          Detección de procesos anómalos, crypto-miners en /tmp, saturación de inodos y conexiones directas al puerto 25.
+        </p>
+      </div>
+
+      <div class="card" style="padding: 1.25rem;">
+        <h3 style="font-size: 1.05rem; margin-top: 0; color: var(--autumn-orange);"><i class="fas fa-history"></i> 10. DNS & Subdomain Changes</h3>
+        <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0;">
+          Auditoría de cambios en zonas DNS, subdominios, alias, IPs reales en <code>X-Forwarded-For</code> y rescate forense en <code>.lastlogin</code>.
         </p>
       </div>
     </div>
