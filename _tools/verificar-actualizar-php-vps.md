@@ -19,7 +19,7 @@ Las distribuciones Linux estables (Ubuntu LTS, Debian, RHEL / AlmaLinux) mantien
 El script evalúa ambos escenarios de forma inteligente:
 
 1. **Versiones Upstream puras (Repositorios Ondrej Sury PPA o Remi):**
-   * Valida directamente contra las versiones mínimas oficiales: `>= 8.2.35`, `>= 8.3.36`, `>= 8.4.27`, `>= 8.5.12`.
+   * Valida directamente contra las versiones mínimas oficiales: `>= 8.2.36`, `>= 8.3.37`, `>= 8.4.28`, `>= 8.5.13`.
 2. **Paquetes Oficiales de la Distribución (Ubuntu, Debian, RHEL / AlmaLinux AppStream):**
    * Identifica la revisión del paquete instalado y audita en tiempo real contra los repositorios de seguridad del sistema operativo.
    * Si el paquete cuenta con la última revisión corregida por la distribución (sin actualizaciones pendientes de seguridad), se valida como **CUMPLE (Corregida con parches de la distribución)**.
